@@ -15,19 +15,9 @@ public class LoginStepDef {
         Driver.get().get(ConfigurationReader.get("url"));
     }
 
-    @When("The user enters valid credentials as a {string}")
-    public void the_user_enters_valid_credentials_as_a(String user) {
-        switch (user.toLowerCase()){
-            case "truck driver":
-                new LoginPage().loginAsATruckDriver();
-                break;
-            case "sales manager":
-                new LoginPage().loginAsASalesManager();
-                break;
-            case "store manager":
-                new LoginPage().loginAsAStoreManager();
-                break;
-        }
+    @When("The user enters valid credentials")
+    public void the_user_enters_valid_credentials() {
+        new LoginPage().loginAsATruckDriver();
     }
 
     @Then("User should be able to login")
