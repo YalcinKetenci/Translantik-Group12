@@ -1,20 +1,19 @@
 package com.translantik.step_definitions;
 
+import com.translantik.pages.DashboardPage;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class TRAN8_FilteringFunctionsStepDef {
 
     @When("the user navigates to {string} {string}")
-    public void the_user_navigates_to(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_user_navigates_to(String tab, String module) {
+        new DashboardPage().navigateToModule(tab,module);
     }
 
     @Then("the user should be able to click {string} button")
     public void the_user_should_be_able_to_click_button(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
     }
 
     @Then("the user should be able to see {string} window")
