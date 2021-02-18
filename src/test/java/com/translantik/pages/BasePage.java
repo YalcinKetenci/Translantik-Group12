@@ -62,7 +62,11 @@ public abstract class  BasePage {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getUserName(){
@@ -96,6 +100,8 @@ public abstract class  BasePage {
     public void navigateToModule(String tab, String module) {
         String tabLocator = "//span[normalize-space()='" + tab + "' and contains(@class, 'title title-level-1')]";
         String moduleLocator = "//span[normalize-space()='" + module + "' and contains(@class, 'title title-level-2')]";
+        new WebDriverWait(Driver.get(),20).until(ExpectedConditions.elementToBeClickable(Driver.get().findElement(By.xpath("//*[text()='Quick Launchpad']"))));
+        BrowserUtils.waitFor(1);
         try {
             BrowserUtils.waitForClickablility(By.xpath(tabLocator), 5);
             WebElement tabElement = Driver.get().findElement(By.xpath(tabLocator));
@@ -111,6 +117,7 @@ public abstract class  BasePage {
         } catch (Exception e) {
 //            BrowserUtils.waitForStaleElement(Driver.get().findElement(By.xpath(moduleLocator)));
             BrowserUtils.clickWithTimeOut(Driver.get().findElement(By.xpath(moduleLocator)),  5);
+            new WebDriverWait(Driver.get(),20).until(ExpectedConditions.elementToBeClickable(Driver.get().findElement(By.xpath("//*[text()='"+module+"']"))));
         }
     }
 
