@@ -51,14 +51,8 @@ Feature:
     Then the user should be able to click "Grid Settings" button
     And the user should be able to see "Grid Settings" window
     And the user should be able to enters "car" inside the "Quick Search" area on the "Grid Settings" window
-    And the user should be able to put the data
-    And the user should NOT be able to see any given options on the "Grid Settings" window
-      | Id             |
-      | Odometer Value |
-      | Date           |
-      | Driver         |
-      | Unit           |
-      | Model          |
+    And the user should  be able to see No columns found on the "Grid Settings" window
+
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -222,8 +216,8 @@ Feature:
     When the user navigates to "Fleet" "Vehicle Odometer"
     Then the user should be able to click "Filters" button
     And the user should be able to see Manage Filters button
-    And the user should be able to click "Manage Filters" button
-    And the user should be able to see "Manage Filters" window
+    And the user should be able to click "Manage filters" button
+    And the user should be able to see "Manage filters" window
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -242,16 +236,16 @@ Feature:
     When the user navigates to "Fleet" "Vehicle Odometer"
     Then the user should be able to click "Filters" button
     And the user should be able to see Manage Filters button
-    And the user should be able to click "Manage Filters" button
-    And the user should be able to see "Manage Filters" window
-    And the user should be able to click "Manage Filters" button
-    And the user should be able to enters one of the given data inside the text-box on the "Manage Filters" window
+    And the user should be able to click "Manage filters" button
+    And the user should be able to see "Manage filters" window
+    And the user should be able to click "Manage filters" button
+    And the user should be able to enters one of the given data inside the text-box on the "Manage filters" window
       | Odometer Value |
       | Date           |
       | Driver         |
       | Unit           |
       | Model          |
-    And the user should be able to see the only  options that includes the written character on the "Manage Filters" window
+    And the user should be able to see the only  options that includes the written character on the "Manage filters" window
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -270,11 +264,11 @@ Feature:
     When the user navigates to "Fleet" "Vehicle Odometer"
     Then the user should be able to click "Filters" button
     And the user should be able to see Manage Filters button
-    And the user should be able to click "Manage Filters" button
-    And the user should be able to see "Manage Filters" window
-    And the user should be able to click "Manage Filters" button
-    And the user should be able to enters "car" inside the text-box on the "Manage Filters" window
-    And the user should NOT be able to see any given options on the "Manage Filters" window
+    And the user should be able to click "Manage filters" button
+    And the user should be able to see "Manage filters" window
+    And the user should be able to click "Manage filters" button
+    And the user should be able to enters "car" inside the text-box on the "Manage filters" window
+    And the user should NOT be able to see any given options on the "Manage filters" window
       | Odometer Value |
       | Date           |
       | Driver         |
@@ -298,10 +292,10 @@ Feature:
     When the user navigates to "Fleet" "Vehicle Odometer"
     Then the user should be able to click "Filters" button
     And the user should be able to see Manage Filters button
-    And the user should be able to click "Manage Filters" button
-    And the user should be able to see "Manage Filters" window
-    And the user should be able to click "Manage Filters" button
-    And the user should be able to enters "car" inside the text-box on the "Manage Filters" window
+    And the user should be able to click "Manage filters" button
+    And the user should be able to see "Manage filters" window
+    And the user should be able to click "Manage filters" button
+    And the user should be able to enters "car" inside the text-box on the "Manage filters" window
     And the user should be able to select(if already not) the given options
       | Odometer Value |
       | Date           |
@@ -334,10 +328,10 @@ Feature:
     When the user navigates to "Fleet" "Vehicle Odometer"
     Then the user should be able to click "Filters" button
     And the user should be able to see Manage Filters button
-    And the user should be able to click "Manage Filters" button
-    And the user should be able to see "Manage Filters" window
-    And the user should be able to click "Manage Filters" button
-    And the user should be able to enters "car" inside the text-box on the "Manage Filters" window
+    And the user should be able to click "Manage filters" button
+    And the user should be able to see "Manage filters" window
+    And the user should be able to click "Manage filters" button
+    And the user should be able to enters "car" inside the text-box on the "Manage filters" window
     And the user should be able to select(if already not) the given options
       | Odometer Value |
       | Date           |
@@ -368,10 +362,10 @@ Feature:
     When the user navigates to "Fleet" "Vehicle Odometer"
     Then the user should be able to click "Filters" button
     And the user should be able to see Manage Filters button
-    And the user should be able to click "Manage Filters" button
-    And the user should be able to see "Manage Filters" window
-    And the user should be able to click "Manage Filters" button
-    And the user should be able to enters "car" inside the text-box on the "Manage Filters" window
+    And the user should be able to click "Manage filters" button
+    And the user should be able to see "Manage filters" window
+    And the user should be able to click "Manage filters" button
+    And the user should be able to enters "car" inside the text-box on the "Manage filters" window
     And the user should be able to select(if already not) the given options
       | Odometer Value |
       | Date           |
