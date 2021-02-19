@@ -1,20 +1,18 @@
 package com.translantik.step_definitions;
 
-import com.translantik.pages.DashboardPage;
+import com.translantik.pages.Dashboard;
 import com.translantik.pages.VehicleOdometerPage;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.tr.Ve;
 import org.junit.Assert;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.logging.SocketHandler;
 
 public class TRAN8_FilteringFunctionsStepDef {
 
@@ -22,13 +20,13 @@ public class TRAN8_FilteringFunctionsStepDef {
 
     @When("the user navigates to {string} {string}")
     public void the_user_navigates_to(String tab, String module) {
-        new DashboardPage().navigateToModule(tab,module);
-        new DashboardPage().waitUntilLoaderScreenDisappear();
+        new Dashboard().navigateToModule(tab,module);
+        new Dashboard().waitUntilLoaderScreenDisappear();
     }
 
     @Then("the user should be able to click {string} button")
     public void the_user_should_be_able_to_click_button(String buttonName) {
-        new DashboardPage().waitUntilLoaderScreenDisappear();
+        new Dashboard().waitUntilLoaderScreenDisappear();
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -75,8 +73,11 @@ public class TRAN8_FilteringFunctionsStepDef {
         Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
         BrowserUtils.waitFor(1);
         new WebDriverWait(Driver.get(),5).until(ExpectedConditions.elementToBeClickable(new VehicleOdometerPage().getGridSettingsButton(buttonName)));
-        System.out.println(new VehicleOdometerPage().getGridSettingsButton(buttonName).getText());
-        new VehicleOdometerPage().getGridSettingsButton(buttonName).click();
+        try {
+            new VehicleOdometerPage().getGridSettingsButton(buttonName).click();
+        }catch (ElementClickInterceptedException e){
+            System.out.println("It's already clicked.");
+        }
     }
 
     @Then("the user should be able to select all given options")
@@ -88,50 +89,65 @@ public class TRAN8_FilteringFunctionsStepDef {
 
     @Then("the user should be able to see the selected options as headers on the table")
     public void the_user_should_be_able_to_see_the_selected_options_as_headers_on_the_table() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        for (WebElement dataOnTheGridSetting : new VehicleOdometerPage().getNamesOfTheDataOnTheGridSettings()) {
+            if (new VehicleOdometerPage().getGridSettingsCheckBoxes(dataOnTheGridSetting.getText()).isSelected()){
+                for (WebElement mainTableHeader : new VehicleOdometerPage().mainTableHeaders) {
+                    System.out.println("DATA");
+                    System.out.println(mainTableHeader.getText().toLowerCase());
+                    Assert.assertTrue(mainTableHeader.getText().toLowerCase().equals(dataOnTheGridSetting.getText().toLowerCase()));
+                }
+            }
+        }
     }
 
     @Then("the user should be able to see the only selected options on the {string} window")
-    public void the_user_should_be_able_to_see_the_only_selected_options_on_the_window(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_user_should_be_able_to_see_the_only_selected_options_on_the_window(String windowName) {
+    new WebDriverWait(Driver.get(),5).until(ExpectedConditions.visibilityOf(new VehicleOdometerPage().getWindow(windowName)));
+    Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
+
+        for (WebElement names : new VehicleOdometerPage().getNamesOfTheDataOnTheGridSettings()) {
+          Assert.assertTrue(new VehicleOdometerPage().getGridSettingsCheckBoxes(names.getText()).isSelected());
+        }
     }
 
     @Then("the user should NOT be able to see the all given options on the {string} window")
-    public void the_user_should_NOT_be_able_to_see_the_all_given_options_on_the_window(String string, io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+    public void the_user_should_NOT_be_able_to_see_the_all_given_options_on_the_window(String windowName, List<String> dataTable) {
+
+        Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
+        for (String data : dataTable) {
+            if (!new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected()){
+                Assert.assertFalse(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected());
+                break;
+            }
+
+        }
     }
 
     @Then("the user should be able to see the all given options on the {string} window")
-    public void the_user_should_be_able_to_see_the_all_given_options_on_the_window(String string, io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+    public void the_user_should_be_able_to_see_the_all_given_options_on_the_window(String windowName, List<String> dataTable) {
+        Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
+        for (String data : dataTable) {
+          Assert.assertTrue(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isDisplayed());
+        }
     }
 
     @Then("the user should be able to select\\(if already not) and deselect the given options")
-    public void the_user_should_be_able_to_select_if_already_not_and_deselect_the_given_options(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+    public void the_user_should_be_able_to_select_if_already_not_and_deselect_the_given_options(List<String> dataTable) throws InterruptedException {
+
+            for (String data : dataTable) {
+                if (!new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected()) {
+                    new VehicleOdometerPage().getGridSettingsCheckBoxes(data).click();
+                    Assert.assertTrue(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected());
+                } else if (new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected()) {
+                    new VehicleOdometerPage().getGridSettingsCheckBoxes(data).click();
+                    Assert.assertFalse(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected());
+                }
+            }
+
+
+
+
+
     }
 
     @Then("Grid Settings window should be disappear")
