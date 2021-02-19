@@ -4,7 +4,7 @@ Feature: Add attachment
 	Background:
 
 		Given The user on the login page
-		When The user enters valid credentials as a "Truck Driver"
+		When The user enters valid credentials
 		Then User should be able to login
 
 

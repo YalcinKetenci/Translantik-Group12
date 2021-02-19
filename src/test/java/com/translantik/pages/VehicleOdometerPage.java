@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleOdometerPage extends BasePage {
@@ -37,16 +38,17 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//*[@class='column-filter-renderable-tab']")
     public WebElement Selected;
 
-
-
-
-
-
-
+    @FindBy(xpath = "//table[@class='grid table-hover table table-bordered table-condensed']//th/a/span[.='Date']")
+    public List<WebElement> mainTableHeaders;
 
 
     public WebElement clickTheButton(String buttonTitle){
         waitUntilLoaderScreenDisappear();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Driver.get().findElement(By.xpath("//*[@title='"+ buttonTitle +"']")).click();
 
         return Driver.get().findElement(By.xpath("//*[@title='"+ buttonTitle +"']"));
@@ -95,6 +97,24 @@ public class VehicleOdometerPage extends BasePage {
                 System.out.println("Invalid button name");
                 return null;
         }
+
+
     }
+
+    public WebElement getGridSettingsCheckBoxes(String filterName){
+
+        return Driver.get().findElement(By.xpath("(//table)[2]//td/label[.='"+filterName+"']/../../td[3]/input"));
+    }
+
+    public List<WebElement> getNamesOfTheDataOnTheGridSettings(){
+        List<WebElement> dataOnWindow = new ArrayList<>();
+        for (WebElement names : namesOfTheDataOnTheGridSettings) {
+            if (names.isDisplayed()){
+                dataOnWindow.add(names);
+            }
+        }
+        return dataOnWindow;
+    }
+
 }
 
