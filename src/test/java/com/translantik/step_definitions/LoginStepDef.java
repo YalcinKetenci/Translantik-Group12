@@ -13,6 +13,7 @@ public class LoginStepDef {
     @Given("The user on the login page")
     public void the_user_on_the_login_page() {
         Driver.get().get(ConfigurationReader.get("url"));
+
     }
 
     @When("The user enters valid credentials as a {string}")
