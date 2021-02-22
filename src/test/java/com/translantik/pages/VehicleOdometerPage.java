@@ -41,6 +41,15 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//table[@class='grid table-hover table table-bordered table-condensed']//th/a/span[.='Date']")
     public List<WebElement> mainTableHeaders;
 
+    @FindBy(css = "td.action-cell.grid-cell.grid-body-cell")
+    public WebElement threeDots;
+
+    @FindBy (css = "i.fa-eye.hide-text")
+    public WebElement view;
+
+    @FindBy (css = "td.string-cell.grid-cell.grid-body-cell.grid-body-cell-Driver")
+    public WebElement driverName;
+
 
     public WebElement clickTheButton(String buttonTitle){
         waitUntilLoaderScreenDisappear();
