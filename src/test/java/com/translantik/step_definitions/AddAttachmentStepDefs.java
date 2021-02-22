@@ -16,8 +16,8 @@ public class AddAttachmentStepDefs {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
-    @Then("User verifies that information page openned")
-    public void user_verifies_that_information_page_openned() {
+    @Then("User verifies that information page opened")
+    public void user_verifies_that_information_page_opened() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
@@ -26,8 +26,8 @@ public class AddAttachmentStepDefs {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
-    @Then("User verifies that Add Attachment popup windows openned")
-    public void user_verifies_that_Add_Attachment_popup_windows_openned() {
+    @Then("User verifies that Add Attachment popup windows opened")
+    public void user_verifies_that_Add_Attachment_popup_windows_opened() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
