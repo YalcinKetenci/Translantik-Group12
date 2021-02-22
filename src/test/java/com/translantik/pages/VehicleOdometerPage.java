@@ -50,6 +50,10 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy (css = "td.string-cell.grid-cell.grid-body-cell.grid-body-cell-Driver")
     public WebElement driverName;
 
+    @FindBy(css = "i.fa-trash-o.hide-text")
+    public WebElement deleteButton;
+
+
 
     public WebElement clickTheButton(String buttonTitle){
         waitUntilLoaderScreenDisappear();
