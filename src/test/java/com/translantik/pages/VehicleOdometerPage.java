@@ -2,8 +2,10 @@ package com.translantik.pages;
 
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
+import io.cucumber.java.an.E;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,7 +40,7 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//*[@class='column-filter-renderable-tab']")
     public WebElement Selected;
 
-    @FindBy(xpath = "//table[@class='grid table-hover table table-bordered table-condensed']//th/a/span[.='Date']")
+    @FindBy(xpath = "//table[@class='grid table-hover table table-bordered table-condensed']//th/a/span")
     public List<WebElement> mainTableHeaders;
 
     @FindBy(css = "td.action-cell.grid-cell.grid-body-cell")
@@ -53,18 +55,35 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(css = "i.fa-trash-o.hide-text")
     public WebElement deleteButton;
 
+    @FindBy(xpath = "//span[@class='close']")
+    public WebElement gridSettingsCloseButton;
+
+    @FindBy(xpath = "//button[@class='ui-multiselect ui-corner-all select-filter-widget']/a")
+    public WebElement manageFiltersButton;
+
+    @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']//label/span")
+    public List<WebElement> nameOfTheDataOnTheManageFilters;
+
+    @FindBy(xpath = "//span[@class='filter-items']/div/div[1]")
+    public List<WebElement> filterItems;
 
 
     public WebElement clickTheButton(String buttonTitle){
         waitUntilLoaderScreenDisappear();
+        WebElement btn;
         try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        Driver.get().findElement(By.xpath("//*[@title='"+ buttonTitle +"']")).click();
 
-        return Driver.get().findElement(By.xpath("//*[@title='"+ buttonTitle +"']"));
+            btn = Driver.get().findElement(By.xpath("//*[@title='" + buttonTitle + "']"));
+            btn.click();
+        }catch (NoSuchElementException e){
+            btn = Driver.get().findElement(By.xpath("//*[.='" + buttonTitle + "']"));
+            btn.click();
+        }
+
+
+        return btn;
+
+
         }
 
     public WebElement getWindow(String windowName){
@@ -72,9 +91,11 @@ public class VehicleOdometerPage extends BasePage {
         switch (windowName.toLowerCase()){
             case "grid settings":
                 gridSettingsWindow.click();
+                BrowserUtils.waitFor(1);
                 return gridSettingsWindow;
             case "manage filters":
                 manageFiltersWindow.click();
+                BrowserUtils.waitFor(1);
                 return manageFiltersWindow;
             default:
                 System.out.println("Invalid window name to get window !!!");
@@ -106,6 +127,8 @@ public class VehicleOdometerPage extends BasePage {
                 return All;
             case "select all":
                 return selectAll;
+            case"x":
+                return gridSettingsCloseButton;
             default:
                 System.out.println("Invalid button name");
                 return null;
@@ -127,6 +150,11 @@ public class VehicleOdometerPage extends BasePage {
             }
         }
         return dataOnWindow;
+    }
+
+    public WebElement getManageFiltersCheckBoxes(String filterName){
+        BrowserUtils.waitFor(1);
+        return Driver.get().findElement(By.xpath("//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']//*[@title='"+filterName+"']//input"));
     }
 
 }
