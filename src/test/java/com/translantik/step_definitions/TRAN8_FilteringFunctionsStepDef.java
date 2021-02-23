@@ -79,7 +79,7 @@ public class TRAN8_FilteringFunctionsStepDef {
     @Then("the user should be able to select all given options")
     public void the_user_should_be_able_to_select_all_given_options(List<String> dataTable) {
         for (String s : dataTable) {
-          Assert.assertTrue(new VehicleOdometerPage().findElementWithExactText(s).isSelected());
+            Assert.assertTrue(new VehicleOdometerPage().findElementWithExactText(s).isSelected());
         }
     }
 
@@ -98,11 +98,11 @@ public class TRAN8_FilteringFunctionsStepDef {
 
     @Then("the user should be able to see the only selected options on the {string} window")
     public void the_user_should_be_able_to_see_the_only_selected_options_on_the_window(String windowName) {
-    new WebDriverWait(Driver.get(),5).until(ExpectedConditions.visibilityOf(new VehicleOdometerPage().getWindow(windowName)));
-    Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
+        new WebDriverWait(Driver.get(),5).until(ExpectedConditions.visibilityOf(new VehicleOdometerPage().getWindow(windowName)));
+        Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
 
         for (WebElement names : new VehicleOdometerPage().getNamesOfTheDataOnTheGridSettings()) {
-          Assert.assertTrue(new VehicleOdometerPage().getGridSettingsCheckBoxes(names.getText()).isSelected());
+            Assert.assertTrue(new VehicleOdometerPage().getGridSettingsCheckBoxes(names.getText()).isSelected());
         }
     }
 
@@ -123,22 +123,22 @@ public class TRAN8_FilteringFunctionsStepDef {
     public void the_user_should_be_able_to_see_the_all_given_options_on_the_window(String windowName, List<String> dataTable) {
         Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
         for (String data : dataTable) {
-          Assert.assertTrue(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isDisplayed());
+            Assert.assertTrue(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isDisplayed());
         }
     }
 
     @Then("the user should be able to select\\(if already not) and deselect the given options")
     public void the_user_should_be_able_to_select_if_already_not_and_deselect_the_given_options(List<String> dataTable) throws InterruptedException {
 
-            for (String data : dataTable) {
-                if (!new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected()) {
-                    new VehicleOdometerPage().getGridSettingsCheckBoxes(data).click();
-                    Assert.assertTrue(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected());
-                } else if (new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected()) {
-                    new VehicleOdometerPage().getGridSettingsCheckBoxes(data).click();
-                    Assert.assertFalse(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected());
-                }
+        for (String data : dataTable) {
+            if (!new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected()) {
+                new VehicleOdometerPage().getGridSettingsCheckBoxes(data).click();
+                Assert.assertTrue(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected());
+            } else if (new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected()) {
+                new VehicleOdometerPage().getGridSettingsCheckBoxes(data).click();
+                Assert.assertFalse(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected());
             }
+        }
     }
 
     @Then("Grid Settings window should be disappear")
@@ -153,7 +153,7 @@ public class TRAN8_FilteringFunctionsStepDef {
 
     @Then("the user should be able to enters {string} inside the text-box on the {string} window")
     public void the_user_should_be_able_to_enters_inside_the_text_box_on_the_window(String data, String windowName) {
-            new VehicleOdometerPage().getTextBox(windowName).sendKeys(data);
+        new VehicleOdometerPage().getTextBox(windowName).sendKeys(data);
     }
 
     @Then("the user should be able to select\\(if already not) the given options")
@@ -169,6 +169,11 @@ public class TRAN8_FilteringFunctionsStepDef {
     @Then("the user should be able to see the selected options as headers next to Manage Filters button")
     public void the_user_should_be_able_to_see_the_selected_options_as_headers_next_to_Manage_Filters_button() {
 
+        for (WebElement checkBox : new VehicleOdometerPage().getAllCheckBoxesOnTheManageFilters) {
+            System.out.println(checkBox.getText());
+            System.out.println(checkBox.getAttribute("value"));
+            System.out.println(checkBox.isSelected());
+        }
     }
 
     @Then("the user should be able to deselect the given options")
@@ -235,30 +240,14 @@ public class TRAN8_FilteringFunctionsStepDef {
 
     @Then("the user should NOT be able to see any given options on the {string} window")
     public void the_user_should_NOT_be_able_to_see_any_given_options_on_the_window(String windowName, List<String> dataTable) {
-    Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
+        Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
         for (String data : dataTable) {
             Assert.assertFalse(new VehicleOdometerPage().getManageFiltersCheckBoxes(data).isDisplayed());
         }
     }
-
-    @Then("the user should be able to see the given options as headers next to Manage Filters button")
-    public void the_user_should_be_able_to_see_the_given_options_as_headers_next_to_Manage_Filters_button(List<String> dataTable) {
-        int a = 0;
-        for (String data : dataTable) {
-            Assert.assertEquals(data,new VehicleOdometerPage().filterItems.get(a++).getText());
-        }
-    }
-
-    @Then("the user should NOT be able to see the given options as headers next to Manage Filters button")
-    public void the_user_should_NOT_be_able_to_see_the_given_options_as_headers_next_to_Manage_Filters_button(List<String> dataTable) {
-        int a = 0;
-        try {
-        for (String data : dataTable) {
-            Assert.assertNotEquals(data,new VehicleOdometerPage().filterItems.get(a++).getText());
-        }
-    }catch (NoSuchElementException e){
-            Assert.assertTrue(true);
-        }
+    @Then("the user should be able to click Manage filters button")
+    public void the_user_should_be_able_to_click_Manage_filters_button() {
+        new VehicleOdometerPage().manageFiltersButton.click();
     }
 
 
