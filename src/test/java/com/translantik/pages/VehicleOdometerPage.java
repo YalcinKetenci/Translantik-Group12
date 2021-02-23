@@ -67,24 +67,20 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//span[@class='filter-items']/div/div[1]")
     public List<WebElement> filterItems;
 
+    @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']//input")
+    public List<WebElement> getAllCheckBoxesOnTheManageFilters;
+
 
     public WebElement clickTheButton(String buttonTitle){
         waitUntilLoaderScreenDisappear();
         WebElement btn;
-        try {
 
-            btn = Driver.get().findElement(By.xpath("//*[@title='" + buttonTitle + "']"));
-            btn.click();
-        }catch (NoSuchElementException e){
-            btn = Driver.get().findElement(By.xpath("//*[.='" + buttonTitle + "']"));
-            btn.click();
-        }
-
-
+        btn = Driver.get().findElement(By.xpath("//*[@title='" + buttonTitle + "']"));
+        btn.click();
         return btn;
 
 
-        }
+    }
 
     public WebElement getWindow(String windowName){
 
