@@ -7,7 +7,7 @@ Feature: Add attachment
 		When The user enters valid credentials
 		Then User should be able to login
 
-
+	@smoke
 	Scenario: Truck driver can add attachment to selected vehicle odometer (US-23)
 		When User navigated to "Fleet" tab "Vehicle Odometer" module
 		And User clicks on any vehicle information
