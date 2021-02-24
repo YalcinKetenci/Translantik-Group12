@@ -3,10 +3,12 @@ package com.translantik.pages;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
 import io.cucumber.java.an.E;
+import io.cucumber.java.bs.A;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleOdometerPage extends BasePage {
+
+    List<String> selectedOptionsOnTheManageFiltersAsString = new ArrayList<>();
 
     @FindBy(xpath = "(//*[@class='dropdown-menu'])[4]")
     public WebElement gridSettingsWindow;
@@ -61,14 +65,20 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//button[@class='ui-multiselect ui-corner-all select-filter-widget']/a")
     public WebElement manageFiltersButton;
 
-    @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']//label/span")
-    public List<WebElement> nameOfTheDataOnTheManageFilters;
+    @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']/li")
+    public List<WebElement> dataOnTheManageFilters;
 
     @FindBy(xpath = "//span[@class='filter-items']/div/div[1]")
     public List<WebElement> filterItems;
 
     @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']//input")
     public List<WebElement> getAllCheckBoxesOnTheManageFilters;
+
+    @FindBy(xpath = "//*[@class='filter-start']/input")
+    public WebElement equalsInput;
+
+    @FindBy(xpath = "//*[@id='OdometerValue']/..//button")
+    public WebElement updateButton;
 
 
     public WebElement clickTheButton(String buttonTitle){
@@ -152,6 +162,18 @@ public class VehicleOdometerPage extends BasePage {
         BrowserUtils.waitFor(1);
         return Driver.get().findElement(By.xpath("//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']//*[@title='"+filterName+"']//input"));
     }
+
+    public void chooseOdometerValueDropDown(String data){
+        Actions actions = new Actions(Driver.get());
+        actions.moveToElement(Driver.get().findElement(By.xpath("//button[@class='btn dropdown-toggle']"))).click().perform();
+        Driver.get().findElement(By.xpath("(//span//ul[@class='dropdown-menu'])[1]/li/a[.='"+data.toLowerCase()+"']")).click();
+    }
+
+    public List<WebElement> getTheDataBaseOnTheMainTableHeaders(){
+        List<WebElement> allData = Driver.get().findElements(By.xpath("//table[@class='grid table-hover table table-bordered table-condensed']//td[2]"));
+        return allData;
+    }
+
 
 }
 
