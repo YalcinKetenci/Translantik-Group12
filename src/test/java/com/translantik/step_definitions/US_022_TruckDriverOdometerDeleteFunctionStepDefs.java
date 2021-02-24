@@ -38,9 +38,19 @@ public class US_022_TruckDriverOdometerDeleteFunctionStepDefs {
         Driver.get().findElement(By.cssSelector("a.btn.ok.btn-danger")).click();
     }
 
-//    @Then("User verifies that selected line is deleted and Vehicle Odometer Deleted message can be seen on top of the page")
-//    public void user_verifies_that_selected_line_is_deleted_and_Vehicle_Odometer_Deleted_message_can_be_seen_on_top_of_the_page() {
-//        // Write code here that turns the phrase above into concrete actions
-//        throw new io.cucumber.java.PendingException();
-//    }
+    @Then("User clicks on Delete popup icon at the end of the each row")
+    public void user_clicks_on_Delete_popup_icon_at_the_end_of_the_each_row() {
+//        new Actions(Driver.get()).moveToElement(Driver.get().findElement(By.xpath("//tr[@class='string-cell grid-cell grid-body-cell grid-body-cell-Model']/td[7]"))).click().perform();
+//        Driver.get().findElement(By.cssSelector("i.fa-trash-o.hide-text")).click();
+        BrowserUtils.waitFor(5);
+        new Actions(Driver.get()).moveToElement(Driver.get().findElement(By.cssSelector("td.action-cell.grid-cell.grid-body-cell"))).perform();
+        Driver.get().findElement(By.cssSelector("i.fa-trash-o.hide-text")).click();
+    }
+
+    @Then("User verifies that selected line is deleted and Vehicle Odometer Deleted message can be seen on top of the page")
+    public void user_verifies_that_selected_line_is_deleted_and_Vehicle_Odometer_Deleted_message_can_be_seen_on_top_of_the_page() {
+
+    }
 }
+
+

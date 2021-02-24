@@ -4,6 +4,7 @@ import com.translantik.pages.Dashboard;
 import com.translantik.pages.VehicleOdometerPage;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -247,4 +248,8 @@ public class TRAN8_FilteringFunctionsStepDef {
     }
 
 
+    @And("the user should NOT be able to see any given options on the {string} window")
+    public void theUserShouldNOTBeAbleToSeeAnyGivenOptionsOnTheWindow(String arg0) {
+
+    }
 }
