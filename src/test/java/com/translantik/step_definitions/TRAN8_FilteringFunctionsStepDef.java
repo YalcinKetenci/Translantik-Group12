@@ -9,6 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,12 +28,7 @@ public class TRAN8_FilteringFunctionsStepDef {
 
     @Then("the user should be able to click {string} button")
     public void the_user_should_be_able_to_click_button(String buttonName) {
-        new Dashboard().waitUntilLoaderScreenDisappear();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         new VehicleOdometerPage().clickTheButton(buttonName);
     }
 
@@ -77,7 +73,7 @@ public class TRAN8_FilteringFunctionsStepDef {
         try {
             new VehicleOdometerPage().getGridSettingsButton(buttonName).click();
         }catch (ElementClickInterceptedException e){
-            System.out.println("It's already clicked.");
+            System.out.println(buttonName + " already clicked.");
         }
     }
 
@@ -93,9 +89,9 @@ public class TRAN8_FilteringFunctionsStepDef {
         for (WebElement dataOnTheGridSetting : new VehicleOdometerPage().getNamesOfTheDataOnTheGridSettings()) {
             if (new VehicleOdometerPage().getGridSettingsCheckBoxes(dataOnTheGridSetting.getText()).isSelected()){
                 for (WebElement mainTableHeader : new VehicleOdometerPage().mainTableHeaders) {
-                    System.out.println("DATA");
-                    System.out.println(mainTableHeader.getText().toLowerCase());
-                    Assert.assertTrue(mainTableHeader.getText().toLowerCase().equals(dataOnTheGridSetting.getText().toLowerCase()));
+                    if (!mainTableHeader.getText().isBlank()) {
+                        Assert.assertTrue(mainTableHeader.getText().toLowerCase().equals(dataOnTheGridSetting.getText().toLowerCase()));
+                    }
                 }
             }
         }
@@ -144,59 +140,45 @@ public class TRAN8_FilteringFunctionsStepDef {
                     Assert.assertFalse(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected());
                 }
             }
-
-
-
-
-
     }
 
     @Then("Grid Settings window should be disappear")
     public void grid_Settings_window_should_be_disappear() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
     }
 
     @Then("the user should be able to see Manage Filters button")
     public void the_user_should_be_able_to_see_Manage_Filters_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Assert.assertTrue(new VehicleOdometerPage().manageFiltersButton.isDisplayed() && new VehicleOdometerPage().manageFiltersButton.isEnabled());
     }
 
     @Then("the user should be able to enters {string} inside the text-box on the {string} window")
-    public void the_user_should_be_able_to_enters_inside_the_text_box_on_the_window(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_user_should_be_able_to_enters_inside_the_text_box_on_the_window(String data, String windowName) {
+            new VehicleOdometerPage().getTextBox(windowName).sendKeys(data);
     }
 
     @Then("the user should be able to select\\(if already not) the given options")
-    public void the_user_should_be_able_to_select_if_already_not_the_given_options(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+    public void the_user_should_be_able_to_select_if_already_not_the_given_options(List<String> dataTable) {
+        for (String data : dataTable) {
+            if(!new VehicleOdometerPage().getManageFiltersCheckBoxes(data).isSelected()){
+                new VehicleOdometerPage().getManageFiltersCheckBoxes(data).click();
+                BrowserUtils.waitFor(1);
+            }
+        }
     }
 
     @Then("the user should be able to see the selected options as headers next to Manage Filters button")
     public void the_user_should_be_able_to_see_the_selected_options_as_headers_next_to_Manage_Filters_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+
     }
 
     @Then("the user should be able to deselect the given options")
-    public void the_user_should_be_able_to_deselect_the_given_options(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+    public void the_user_should_be_able_to_deselect_the_given_options(List<String> dataTable) {
+        for (String data : dataTable) {
+            if(new VehicleOdometerPage().getManageFiltersCheckBoxes(data).isSelected()){
+                new VehicleOdometerPage().getManageFiltersCheckBoxes(data).click();
+            }
+        }
     }
 
     @Then("the user should NOT be able to see the selected options as headers next to Manage Filters button")
@@ -245,6 +227,39 @@ public class TRAN8_FilteringFunctionsStepDef {
     public void the_page_should_be_refreshed() {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
+    }
+
+    @Then("{string} window should be disappear")
+    public void window_should_be_disappear(String windowName) {
+        Assert.assertFalse(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
+    }
+
+    @Then("the user should NOT be able to see any given options on the {string} window")
+    public void the_user_should_NOT_be_able_to_see_any_given_options_on_the_window(String windowName, List<String> dataTable) {
+    Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
+        for (String data : dataTable) {
+            Assert.assertFalse(new VehicleOdometerPage().getManageFiltersCheckBoxes(data).isDisplayed());
+        }
+    }
+
+    @Then("the user should be able to see the given options as headers next to Manage Filters button")
+    public void the_user_should_be_able_to_see_the_given_options_as_headers_next_to_Manage_Filters_button(List<String> dataTable) {
+        int a = 0;
+        for (String data : dataTable) {
+            Assert.assertEquals(data,new VehicleOdometerPage().filterItems.get(a++).getText());
+        }
+    }
+
+    @Then("the user should NOT be able to see the given options as headers next to Manage Filters button")
+    public void the_user_should_NOT_be_able_to_see_the_given_options_as_headers_next_to_Manage_Filters_button(List<String> dataTable) {
+        int a = 0;
+        try {
+        for (String data : dataTable) {
+            Assert.assertNotEquals(data,new VehicleOdometerPage().filterItems.get(a++).getText());
+        }
+    }catch (NoSuchElementException e){
+            Assert.assertTrue(true);
+        }
     }
 
 

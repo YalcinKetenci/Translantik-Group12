@@ -5,6 +5,7 @@ Feature:
     Given The user on the login page
     When The user enters valid credentials
     Then User should be able to login
+
 		
 	#1_TRAN-233
 	#{color:#de350b}*User Story :* {color}
@@ -197,7 +198,7 @@ Feature:
     Then the user should be able to click "Grid Settings" button
     And the user should be able to see "Grid Settings" window
     And the user should be able to click "x" button on the "Grid Settings" window
-    And Grid Settings window should be disappear
+    And "Grid Settings" window should be disappear
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -266,7 +267,6 @@ Feature:
     And the user should be able to see Manage Filters button
     And the user should be able to click "Manage filters" button
     And the user should be able to see "Manage filters" window
-    And the user should be able to click "Manage filters" button
     And the user should be able to enters "car" inside the text-box on the "Manage filters" window
     And the user should NOT be able to see any given options on the "Manage filters" window
       | Odometer Value |
@@ -295,21 +295,30 @@ Feature:
     And the user should be able to click "Manage filters" button
     And the user should be able to see "Manage filters" window
     And the user should be able to click "Manage filters" button
-    And the user should be able to enters "car" inside the text-box on the "Manage filters" window
     And the user should be able to select(if already not) the given options
       | Odometer Value |
       | Date           |
       | Driver         |
       | Unit           |
       | Model          |
-    And the user should be able to see the selected options as headers next to Manage Filters button
+    And the user should be able to see the given options as headers next to Manage Filters button
+      | Odometer Value |
+      | Date           |
+      | Driver         |
+      | Unit           |
+      | Model          |
     And the user should be able to deselect the given options
       | Odometer Value |
       | Date           |
       | Driver         |
       | Unit           |
       | Model          |
-    And the user should NOT be able to see the selected options as headers next to Manage Filters button
+    And the user should NOT be able to see the given options as headers next to Manage Filters button
+      | Odometer Value |
+      | Date           |
+      | Driver         |
+      | Unit           |
+      | Model          |
 
 	#{color:#00875a}*User Story :* {color}
 	#
