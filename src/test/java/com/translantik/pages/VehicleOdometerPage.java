@@ -1,25 +1,17 @@
 package com.translantik.pages;
 
-import com.translantik.step_definitions.US_017_FilteringFunctionsStepDef;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
-import io.cucumber.java.an.E;
-import io.cucumber.java.bs.A;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleOdometerPage extends BasePage {
-
-    List<String> selectedOptionsOnTheManageFiltersAsString = new ArrayList<>();
 
     @FindBy(xpath = "(//*[@class='dropdown-menu'])[4]")
     public WebElement gridSettingsWindow;
@@ -39,7 +31,7 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']/li/label/span")
     public List<WebElement> namesOfTheDataOnTheManageFilters;
 
-    @FindBy(xpath = "//*[text()='Select All']")
+    @FindBy(xpath = "//div[@class='column-manager-actions']/a")
     public WebElement selectAll;
 
     @FindBy(xpath = "//*[@class='column-filter-renderable-tab active']")
@@ -48,7 +40,7 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//*[@class='column-filter-renderable-tab']")
     public WebElement Selected;
 
-    @FindBy(xpath = "//table[@class='grid table-hover table table-bordered table-condensed']//th/a/span")
+    @FindBy(xpath = "//table[@class='grid table-hover table table-bordered table-condensed']//th[starts-with(@class,'grid-cell grid-header-cell grid-header-cell')]/a/span[1]")
     public List<WebElement> mainTableHeaders;
 
     @FindBy(css = "td.action-cell.grid-cell.grid-body-cell")
@@ -75,9 +67,6 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//span[@class='filter-items']/div/div[1]")
     public List<WebElement> filterItems;
 
-    @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']//input")
-    public List<WebElement> getAllCheckBoxesOnTheManageFilters;
-
     @FindBy(xpath = "//*[@class='filter-start']/input")
     public WebElement equalsInput;
 
@@ -88,12 +77,11 @@ public class VehicleOdometerPage extends BasePage {
     public WebElement noDataAlert;
 
 
-    public WebElement clickTheButton(String buttonTitle){
+    public void clickTheButton(String buttonTitle){
         waitUntilLoaderScreenDisappear();
         WebElement btn;
         btn = Driver.get().findElement(By.xpath("//*[@title='" + buttonTitle + "']"));
         btn.click();
-        return btn;
     }
 
     public WebElement getWindow(String windowName){
@@ -162,10 +150,6 @@ public class VehicleOdometerPage extends BasePage {
         return dataOnWindow;
     }
 
-    public WebElement getNameOfTheDataOnTheGridSettings(String dataName){
-       return Driver.get().findElement(By.xpath("(//table[@class='grid table-hover table table-condensed'])[2]//td[1]/label[.='"+dataName+"']"));
-    }
-
     public WebElement getManageFiltersCheckBoxes(String filterName){
         BrowserUtils.waitFor(1);
         return Driver.get().findElement(By.xpath("//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']//*[@title='"+filterName+"']//input"));
@@ -178,8 +162,7 @@ public class VehicleOdometerPage extends BasePage {
     }
 
     public List<WebElement> getTheDataBaseOnTheMainTableHeaders(){
-        List<WebElement> allData = Driver.get().findElements(By.xpath("//table[@class='grid table-hover table table-bordered table-condensed']//td[2]"));
-        return allData;
+        return Driver.get().findElements(By.xpath("//table[@class='grid table-hover table table-bordered table-condensed']//td[2]"));
     }
 
     public List<WebElement> getNamesOfTheDataBasedOnTheWindow(String windowName){
@@ -190,18 +173,6 @@ public class VehicleOdometerPage extends BasePage {
                 return namesOfTheDataOnTheManageFilters;
             default:
                 System.out.println("Invalid window name | getNamesOfTheDataOnTheBasedOnTheWindow method");
-                return null;
-        }
-    }
-
-    public String getEnteredDataBasedOnTheWindow(String windowName){
-        switch (windowName.toLowerCase()){
-            case "grid settings":
-                return new US_017_FilteringFunctionsStepDef().enteredDataIntoGridSettings;
-            case "manage filters":
-                return new US_017_FilteringFunctionsStepDef().enteredDataIntoManageFilters;
-            default:
-                System.out.println("Invalid window name | getEnteredDataBasedOnTheWindow method");
                 return null;
         }
     }
