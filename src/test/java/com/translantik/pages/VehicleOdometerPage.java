@@ -1,5 +1,6 @@
 package com.translantik.pages;
 
+import com.translantik.step_definitions.US_017_FilteringFunctionsStepDef;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
 import io.cucumber.java.an.E;
@@ -34,6 +35,9 @@ public class VehicleOdometerPage extends BasePage {
 
     @FindBy(xpath = "(//table)[2]/tbody/tr/td[1]/label")
     public List<WebElement> namesOfTheDataOnTheGridSettings;
+
+    @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']/li/label/span")
+    public List<WebElement> namesOfTheDataOnTheManageFilters;
 
     @FindBy(xpath = "//*[text()='Select All']")
     public WebElement selectAll;
@@ -80,16 +84,16 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//*[@id='OdometerValue']/..//button")
     public WebElement updateButton;
 
+    @FindBy(xpath = "//div[@class='no-data']/span")
+    public WebElement noDataAlert;
+
 
     public WebElement clickTheButton(String buttonTitle){
         waitUntilLoaderScreenDisappear();
         WebElement btn;
-
         btn = Driver.get().findElement(By.xpath("//*[@title='" + buttonTitle + "']"));
         btn.click();
         return btn;
-
-
     }
 
     public WebElement getWindow(String windowName){
@@ -158,6 +162,10 @@ public class VehicleOdometerPage extends BasePage {
         return dataOnWindow;
     }
 
+    public WebElement getNameOfTheDataOnTheGridSettings(String dataName){
+       return Driver.get().findElement(By.xpath("(//table[@class='grid table-hover table table-condensed'])[2]//td[1]/label[.='"+dataName+"']"));
+    }
+
     public WebElement getManageFiltersCheckBoxes(String filterName){
         BrowserUtils.waitFor(1);
         return Driver.get().findElement(By.xpath("//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']//*[@title='"+filterName+"']//input"));
@@ -174,6 +182,29 @@ public class VehicleOdometerPage extends BasePage {
         return allData;
     }
 
+    public List<WebElement> getNamesOfTheDataBasedOnTheWindow(String windowName){
+        switch (windowName.toLowerCase()){
+            case "grid settings":
+                return namesOfTheDataOnTheGridSettings;
+            case "manage filters":
+                return namesOfTheDataOnTheManageFilters;
+            default:
+                System.out.println("Invalid window name | getNamesOfTheDataOnTheBasedOnTheWindow method");
+                return null;
+        }
+    }
+
+    public String getEnteredDataBasedOnTheWindow(String windowName){
+        switch (windowName.toLowerCase()){
+            case "grid settings":
+                return new US_017_FilteringFunctionsStepDef().enteredDataIntoGridSettings;
+            case "manage filters":
+                return new US_017_FilteringFunctionsStepDef().enteredDataIntoManageFilters;
+            default:
+                System.out.println("Invalid window name | getEnteredDataBasedOnTheWindow method");
+                return null;
+        }
+    }
 
 }
 
