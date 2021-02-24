@@ -8,7 +8,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,6 +17,7 @@ import java.util.List;
 public class TRAN8_FilteringFunctionsStepDef {
 
     String enteredDataIntoGridSettings;
+    String pageHtml;
 
     @When("the user navigates to {string} {string}")
     public void the_user_navigates_to(String tab, String module) {
@@ -27,7 +27,6 @@ public class TRAN8_FilteringFunctionsStepDef {
 
     @Then("the user should be able to click {string} button")
     public void the_user_should_be_able_to_click_button(String buttonName) {
-
         new VehicleOdometerPage().clickTheButton(buttonName);
     }
 
@@ -89,7 +88,7 @@ public class TRAN8_FilteringFunctionsStepDef {
             if (new VehicleOdometerPage().getGridSettingsCheckBoxes(dataOnTheGridSetting.getText()).isSelected()){
                 for (WebElement mainTableHeader : new VehicleOdometerPage().mainTableHeaders) {
                     if (!mainTableHeader.getText().isBlank()) {
-                        Assert.assertTrue(mainTableHeader.getText().toLowerCase().equals(dataOnTheGridSetting.getText().toLowerCase()));
+                        Assert.assertTrue(mainTableHeader.getText().equalsIgnoreCase(dataOnTheGridSetting.getText()));
                     }
                 }
             }
@@ -128,7 +127,7 @@ public class TRAN8_FilteringFunctionsStepDef {
     }
 
     @Then("the user should be able to select\\(if already not) and deselect the given options")
-    public void the_user_should_be_able_to_select_if_already_not_and_deselect_the_given_options(List<String> dataTable) throws InterruptedException {
+    public void the_user_should_be_able_to_select_if_already_not_and_deselect_the_given_options(List<String> dataTable)  {
 
         for (String data : dataTable) {
             if (!new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected()) {
@@ -143,7 +142,7 @@ public class TRAN8_FilteringFunctionsStepDef {
 
     @Then("Grid Settings window should be disappear")
     public void grid_Settings_window_should_be_disappear() {
-
+        Assert.assertFalse(new VehicleOdometerPage().getWindow("Grid Settings").isDisplayed());
     }
 
     @Then("the user should be able to see Manage Filters button")
@@ -160,19 +159,22 @@ public class TRAN8_FilteringFunctionsStepDef {
     public void the_user_should_be_able_to_select_if_already_not_the_given_options(List<String> dataTable) {
         for (String data : dataTable) {
             if(!new VehicleOdometerPage().getManageFiltersCheckBoxes(data).isSelected()){
-                new VehicleOdometerPage().getManageFiltersCheckBoxes(data).click();
                 BrowserUtils.waitFor(1);
+                new VehicleOdometerPage().getManageFiltersCheckBoxes(data).click();
             }
+        }
+        for (String data : dataTable) {
+          Assert.assertTrue(new VehicleOdometerPage().getManageFiltersCheckBoxes(data).isSelected());
         }
     }
 
     @Then("the user should be able to see the selected options as headers next to Manage Filters button")
     public void the_user_should_be_able_to_see_the_selected_options_as_headers_next_to_Manage_Filters_button() {
-
-        for (WebElement checkBox : new VehicleOdometerPage().getAllCheckBoxesOnTheManageFilters) {
-            System.out.println(checkBox.getText());
-            System.out.println(checkBox.getAttribute("value"));
-            System.out.println(checkBox.isSelected());
+        int a = 0;
+        for (WebElement dataOnTheManageFilter : new VehicleOdometerPage().dataOnTheManageFilters) {
+            if(new VehicleOdometerPage().getManageFiltersCheckBoxes(dataOnTheManageFilter.getText()).isSelected()){
+                Assert.assertTrue(new VehicleOdometerPage().filterItems.get(a++).getText().contains(dataOnTheManageFilter.getText()));
+            }
         }
     }
 
@@ -187,50 +189,68 @@ public class TRAN8_FilteringFunctionsStepDef {
 
     @Then("the user should NOT be able to see the selected options as headers next to Manage Filters button")
     public void the_user_should_NOT_be_able_to_see_the_selected_options_as_headers_next_to_Manage_Filters_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        for (WebElement filterItem : new VehicleOdometerPage().filterItems) {
+            Assert.assertTrue(filterItem.getText().isBlank());
+        }
     }
 
+    @Then("the user should be able to click the {string} item")
+    public void the_user_should_be_able_to_click_the_item(String filterItem) {
+        for (WebElement item : new VehicleOdometerPage().filterItems) {
+            if (item.getText().contains(filterItem)){
+                item.click();
+            }
+        }
+    }
     @Then("the user should be able to click the {string} option")
-    public void the_user_should_be_able_to_click_the_option(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_user_should_be_able_to_click_the_option(String filterItem) {
+        new VehicleOdometerPage().chooseOdometerValueDropDown(filterItem);
+
     }
 
-    @Then("the user should be able to put {string}")
-    public void the_user_should_be_able_to_put(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("the user should be able to put {string} \"Equals\" into the equals textboxes on the odometer value item")
+    public void the_user_should_be_able_to_put_Equals_into_the_equals_textboxes_on_the_odometer_value_item(String data) {
+        new VehicleOdometerPage().equalsInput.sendKeys(data);
     }
 
     @Then("the user should be able to put Update button")
     public void the_user_should_be_able_to_put_Update_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    new VehicleOdometerPage().updateButton.click();
     }
 
     @Then("the user should be able to see only include {string} odometers")
-    public void the_user_should_be_able_to_see_only_include_odometers(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_user_should_be_able_to_see_only_include_odometers(String data) {
+        new Dashboard().waitUntilLoaderScreenDisappear();
+        BrowserUtils.waitFor(2);
+        for (WebElement base : new VehicleOdometerPage().getTheDataBaseOnTheMainTableHeaders()) {
+            System.out.println(base.getText());
+            Assert.assertEquals(base.getText(), data);
+        }
     }
 
-    @Then("the user should NOT be able to see only include {string} odometers")
-    public void the_user_should_NOT_be_able_to_see_only_include_odometers(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("the user should NOT be able to see any odometers")
+    public void the_user_should_NOT_be_able_to_see_any_odometers() {
+        new Dashboard().waitUntilLoaderScreenDisappear();
+        BrowserUtils.waitFor(2);
+        for (WebElement base : new VehicleOdometerPage().getTheDataBaseOnTheMainTableHeaders()) {
+            System.out.println(base.getText());
+            Assert.assertTrue(base.getText().isBlank() || base.getText().isEmpty());
+        }
     }
 
     @Then("the user should be able to select {string} option")
     public void the_user_should_be_able_to_select_option(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        pageHtml=Driver.get().getCurrentUrl();
+        new VehicleOdometerPage().getGridSettingsCheckBoxes(string).click();
     }
 
     @Then("the page should be refreshed")
     public void the_page_should_be_refreshed() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Assert.assertEquals("Page should be refresh",Driver.get().getCurrentUrl(),pageHtml);
+    }
+    @Then("the page should be reset")
+    public void the_page_should_be_reset() {
+        Assert.assertNotEquals("Page should be refresh",Driver.get().getCurrentUrl(),pageHtml);
     }
 
     @Then("{string} window should be disappear")
@@ -249,6 +269,5 @@ public class TRAN8_FilteringFunctionsStepDef {
     public void the_user_should_be_able_to_click_Manage_filters_button() {
         new VehicleOdometerPage().manageFiltersButton.click();
     }
-
 
 }
