@@ -4,15 +4,18 @@ import com.translantik.pages.Dashboard;
 import com.translantik.pages.VehicleOdometerPage;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
-import io.cucumber.java.en.And;
+
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
 import org.junit.Assert;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class US_017_FilteringFunctionsStepDef {
@@ -29,6 +32,7 @@ public class US_017_FilteringFunctionsStepDef {
 
     @Then("the user should be able to click {string} button")
     public void the_user_should_be_able_to_click_button(String buttonName) {
+        pageHtml=Driver.get().getCurrentUrl();
         new VehicleOdometerPage().clickTheButton(buttonName);
     }
 
@@ -65,8 +69,8 @@ public class US_017_FilteringFunctionsStepDef {
         }
     }
 
-    @Then("the user should be able to enters {string} inside the {string} area on the {string} window")
-    public void the_user_should_be_able_to_enters_inside_the_area_on_the_window(String data, String textBoxName, String windowName) {
+    @Then("the user should be able to enters {string} inside the Quick Search area on the {string} window")
+    public void the_user_should_be_able_to_enters_inside_the_Quick_Search_area_on_the_window(String data, String windowName) {
         new VehicleOdometerPage().getTextBox(windowName).sendKeys(data);
 
     }
@@ -82,7 +86,12 @@ public class US_017_FilteringFunctionsStepDef {
         Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
         BrowserUtils.waitFor(1);
         try {
-            new VehicleOdometerPage().getGridSettingsButton(buttonName).click();
+            if (buttonName.equalsIgnoreCase("select all")){
+                Actions act = new Actions(Driver.get());
+                act.moveToElement(new VehicleOdometerPage().getGridSettingsButton(buttonName)).pause(500).click(new VehicleOdometerPage().getGridSettingsButton(buttonName)).perform();
+            }else {
+                new VehicleOdometerPage().getGridSettingsButton(buttonName).click();
+            }
         }catch (ElementClickInterceptedException e) {
             System.out.println(buttonName + " already clicked.");
         }
@@ -91,21 +100,29 @@ public class US_017_FilteringFunctionsStepDef {
     @Then("the user should be able to select all given options")
     public void the_user_should_be_able_to_select_all_given_options(List<String> dataTable) {
         for (String data : dataTable) {
-            Assert.assertTrue(new VehicleOdometerPage().getNameOfTheDataOnTheGridSettings(data).isSelected());
+            Assert.assertTrue(new VehicleOdometerPage().getGridSettingsCheckBoxes(data).isSelected());
         }
     }
 
     @Then("the user should be able to see the selected options as headers on the table")
     public void the_user_should_be_able_to_see_the_selected_options_as_headers_on_the_table() {
-        for (WebElement dataOnTheGridSetting : new VehicleOdometerPage().getNamesOfTheDataOnTheGridSettings()) {
-            if (new VehicleOdometerPage().getGridSettingsCheckBoxes(dataOnTheGridSetting.getText()).isSelected()){
-                for (WebElement mainTableHeader : new VehicleOdometerPage().mainTableHeaders) {
-                    if (!mainTableHeader.getText().isBlank()) {
-                        Assert.assertTrue(mainTableHeader.getText().equalsIgnoreCase(dataOnTheGridSetting.getText()));
-                    }
-                }
+
+        List<String> selectedOptions = new ArrayList<>();
+        for (WebElement name : new VehicleOdometerPage().namesOfTheDataOnTheGridSettings) {
+            if (new VehicleOdometerPage().getGridSettingsCheckBoxes(name.getText()).isSelected()) {
+                selectedOptions.add(name.getText().toLowerCase());
             }
         }
+
+        List<String> headers = new ArrayList<>();
+        for (WebElement header : new VehicleOdometerPage().mainTableHeaders) {
+            if (!header.getText().isBlank()) {
+                headers.add(header.getText().toLowerCase());
+            }
+        }
+
+        Assert.assertEquals(selectedOptions, headers);
+
     }
 
     @Then("the user should be able to see the only selected options on the {string} window")
@@ -250,9 +267,8 @@ public class US_017_FilteringFunctionsStepDef {
     }
 
     @Then("the user should be able to select {string} option")
-    public void the_user_should_be_able_to_select_option(String string) {
-        pageHtml=Driver.get().getCurrentUrl();
-        new VehicleOdometerPage().getGridSettingsCheckBoxes(string).click();
+    public void the_user_should_be_able_to_select_option(String data) {
+        new VehicleOdometerPage().getGridSettingsCheckBoxes(data).click();
     }
 
     @Then("the page should be refreshed")
