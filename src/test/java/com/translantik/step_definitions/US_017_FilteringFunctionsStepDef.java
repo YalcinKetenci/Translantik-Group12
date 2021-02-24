@@ -4,6 +4,7 @@ import com.translantik.pages.Dashboard;
 import com.translantik.pages.VehicleOdometerPage;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -14,10 +15,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class TRAN8_FilteringFunctionsStepDef {
+public class US_017_FilteringFunctionsStepDef {
 
-    String enteredDataIntoGridSettings;
-    String pageHtml;
+    public String enteredDataIntoGridSettings;
+    public String enteredDataIntoManageFilters;
+    public String pageHtml;
 
     @When("the user navigates to {string} {string}")
     public void the_user_navigates_to(String tab, String module) {
@@ -38,15 +40,27 @@ public class TRAN8_FilteringFunctionsStepDef {
     @Then("the user should be able to enters one of the given data inside the text-box on the {string} window")
     public void the_user_should_be_able_to_enters_one_of_the_given_data_inside_the_text_box_on_the_window(String windowName, List<String> data) {
         new VehicleOdometerPage().getTextBox(windowName).sendKeys(data.get(0));
-        enteredDataIntoGridSettings= data.get(0);
+        switch (windowName.toLowerCase()){
+            case "grid settings":
+                enteredDataIntoGridSettings= data.get(0);
+                break;
+            case "manage filters":
+                enteredDataIntoManageFilters= data.get(0);
+                break;
+        }
     }
 
-    @Then("the user should be able to see the only  options that includes the written character on the {string} window")
-    public void the_user_should_be_able_to_see_the_only_options_that_includes_the_written_character_on_the_window(String string) {
+    @Then("the user should be able to see the only options that includes the written character on the {string} window")
+    public void the_user_should_be_able_to_see_the_only_options_that_includes_the_written_character_on_the_window(String windowName) {
         BrowserUtils.waitFor(1);
-        for (WebElement names : new VehicleOdometerPage().namesOfTheDataOnTheGridSettings) {
+
+        for (WebElement names : new VehicleOdometerPage().getNamesOfTheDataBasedOnTheWindow(windowName)) {
             if(names.isDisplayed() && names.isEnabled()) {
-                Assert.assertTrue(names.getText().contains(enteredDataIntoGridSettings));
+                if (windowName.equalsIgnoreCase("manage filters")) {
+                    Assert.assertEquals(names.getText(), enteredDataIntoManageFilters);
+                }else if (windowName.equalsIgnoreCase("grid settings")){
+                    Assert.assertEquals(names.getText(),enteredDataIntoGridSettings);
+                }
             }
         }
     }
@@ -67,18 +81,17 @@ public class TRAN8_FilteringFunctionsStepDef {
     public void the_user_should_be_able_to_click_button_on_the_window(String buttonName, String windowName) {
         Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
         BrowserUtils.waitFor(1);
-        new WebDriverWait(Driver.get(),5).until(ExpectedConditions.elementToBeClickable(new VehicleOdometerPage().getGridSettingsButton(buttonName)));
         try {
             new VehicleOdometerPage().getGridSettingsButton(buttonName).click();
-        }catch (ElementClickInterceptedException e){
+        }catch (ElementClickInterceptedException e) {
             System.out.println(buttonName + " already clicked.");
         }
     }
 
     @Then("the user should be able to select all given options")
     public void the_user_should_be_able_to_select_all_given_options(List<String> dataTable) {
-        for (String s : dataTable) {
-            Assert.assertTrue(new VehicleOdometerPage().findElementWithExactText(s).isSelected());
+        for (String data : dataTable) {
+            Assert.assertTrue(new VehicleOdometerPage().getNameOfTheDataOnTheGridSettings(data).isSelected());
         }
     }
 
@@ -142,7 +155,7 @@ public class TRAN8_FilteringFunctionsStepDef {
 
     @Then("Grid Settings window should be disappear")
     public void grid_Settings_window_should_be_disappear() {
-        Assert.assertFalse(new VehicleOdometerPage().getWindow("Grid Settings").isDisplayed());
+        Assert.assertFalse(new VehicleOdometerPage().gridSettingsWindow.isDisplayed());
     }
 
     @Then("the user should be able to see Manage Filters button")
@@ -213,8 +226,8 @@ public class TRAN8_FilteringFunctionsStepDef {
         new VehicleOdometerPage().equalsInput.sendKeys(data);
     }
 
-    @Then("the user should be able to put Update button")
-    public void the_user_should_be_able_to_put_Update_button() {
+    @Then("the user should be able to click Update button")
+    public void the_user_should_be_able_to_click_Update_button() {
     new VehicleOdometerPage().updateButton.click();
     }
 
@@ -222,6 +235,7 @@ public class TRAN8_FilteringFunctionsStepDef {
     public void the_user_should_be_able_to_see_only_include_odometers(String data) {
         new Dashboard().waitUntilLoaderScreenDisappear();
         BrowserUtils.waitFor(2);
+        Assert.assertTrue(new VehicleOdometerPage().getTheDataBaseOnTheMainTableHeaders().size()>0);
         for (WebElement base : new VehicleOdometerPage().getTheDataBaseOnTheMainTableHeaders()) {
             System.out.println(base.getText());
             Assert.assertEquals(base.getText(), data);
@@ -232,10 +246,7 @@ public class TRAN8_FilteringFunctionsStepDef {
     public void the_user_should_NOT_be_able_to_see_any_odometers() {
         new Dashboard().waitUntilLoaderScreenDisappear();
         BrowserUtils.waitFor(2);
-        for (WebElement base : new VehicleOdometerPage().getTheDataBaseOnTheMainTableHeaders()) {
-            System.out.println(base.getText());
-            Assert.assertTrue(base.getText().isBlank() || base.getText().isEmpty());
-        }
+        Assert.assertTrue(new VehicleOdometerPage().noDataAlert.isDisplayed());
     }
 
     @Then("the user should be able to select {string} option")

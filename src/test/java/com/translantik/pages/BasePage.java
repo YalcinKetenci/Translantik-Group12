@@ -120,11 +120,9 @@ public abstract class  BasePage {
             new WebDriverWait(Driver.get(),20).until(ExpectedConditions.elementToBeClickable(Driver.get().findElement(By.xpath("//*[text()='"+module+"']"))));
         }
         try{
-            new WebDriverWait(Driver.get(),5).until(ExpectedConditions.visibilityOf(loaderMask));
-            new WebDriverWait(Driver.get(),5).until(ExpectedConditions.invisibilityOf(loaderMask));
-        }catch (Exception e ){
-
-        }
+            new WebDriverWait(Driver.get(),20).until(ExpectedConditions.visibilityOf(loaderMask));
+            new WebDriverWait(Driver.get(),20).until(ExpectedConditions.invisibilityOf(loaderMask));
+        }catch (Exception e ){}
     }
 
 }

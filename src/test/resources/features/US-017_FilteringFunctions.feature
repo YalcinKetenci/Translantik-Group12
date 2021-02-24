@@ -1,4 +1,4 @@
-Feature: 
+Feature:
 
 	Background:
 		#@TRAN-233
@@ -31,7 +31,7 @@ Feature:
 		| Driver         |
 		| Unit           |
 		| Model          |
-		And the user should be able to see the only  options that includes the written character on the "Grid Settings" window	
+		And the user should be able to see the only options that includes the written character on the "Grid Settings" window
 
 	#{color:#de350b}*User Story :* {color}
 	#
@@ -78,7 +78,7 @@ Feature:
 		| Driver         |
 		| Unit           |
 		| Model          |
-		And the user should be able to see the selected options as headers on the table	
+		And the user should be able to see the selected options as headers on the table
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -98,7 +98,7 @@ Feature:
 		Then the user should be able to click "Grid Settings" button
 		And the user should be able to see "Grid Settings" window
 		And the user should be able to click "Selected" button on the "Grid Settings" window
-		And the user should be able to see the only selected options on the "Grid Settings" window	
+		And the user should be able to see the only selected options on the "Grid Settings" window
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -124,7 +124,7 @@ Feature:
 		| Date           |
 		| Driver         |
 		| Unit           |
-		| Model          |	
+		| Model          |
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -150,7 +150,7 @@ Feature:
 		| Date           |
 		| Driver         |
 		| Unit           |
-		| Model          |	
+		| Model          |
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -165,7 +165,7 @@ Feature:
 	#3-Truck driver can refresh the page by using Refresh button
 	#4-Truck driver can reset the filtering settings by using Reset button
 	@TRAN-243 @TRAN-269 @TRAN-247
-	Scenario: US-017 | Truck driver can select options. 
+	Scenario: US-017 | Truck driver can select options.
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Grid Settings" button
 		And the user should be able to see "Grid Settings" window
@@ -176,7 +176,7 @@ Feature:
 		| Driver         |
 		| Unit           |
 		| Model          |
-		And the user should be able to see the selected options as headers on the table	
+		And the user should be able to see the selected options as headers on the table
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -196,7 +196,7 @@ Feature:
 		Then the user should be able to click "Grid Settings" button
 		And the user should be able to see "Grid Settings" window
 		And the user should be able to click "x" button on the "Grid Settings" window
-		And Grid Settings window should be disappear	
+		And Grid Settings window should be disappear
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -215,8 +215,8 @@ Feature:
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Filters" button
 		And the user should be able to see Manage Filters button
-		And the user should be able to click "Manage filters" button
-		And the user should be able to see "Manage filters" window	
+		And the user should be able to click Manage filters button
+		And the user should be able to see "Manage filters" window
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -235,16 +235,15 @@ Feature:
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Filters" button
 		And the user should be able to see Manage Filters button
-		And the user should be able to click "Manage filters" button
+		And the user should be able to click Manage filters button
 		And the user should be able to see "Manage filters" window
-		And the user should be able to click "Manage filters" button
 		And the user should be able to enters one of the given data inside the text-box on the "Manage filters" window
-		| Odometer Value |
+        | Odometer Value |
 		| Date           |
 		| Driver         |
 		| Unit           |
 		| Model          |
-		And the user should be able to see the only  options that includes the written character on the "Manage filters" window	
+		And the user should be able to see the only options that includes the written character on the "Manage filters" window
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -263,16 +262,15 @@ Feature:
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Filters" button
 		And the user should be able to see Manage Filters button
-		And the user should be able to click "Manage filters" button
+		And the user should be able to click Manage filters button
 		And the user should be able to see "Manage filters" window
-		And the user should be able to click "Manage filters" button
 		And the user should be able to enters "car" inside the text-box on the "Manage filters" window
 		And the user should NOT be able to see any given options on the "Manage filters" window
 		| Odometer Value |
 		| Date           |
 		| Driver         |
 		| Unit           |
-		| Model          |	
+		| Model          |
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -306,7 +304,7 @@ Feature:
 		| Driver         |
 		| Unit           |
 		| Model          |
-		And the user should NOT be able to see the selected options as headers next to Manage Filters button	
+		And the user should NOT be able to see the selected options as headers next to Manage Filters button
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -336,9 +334,9 @@ Feature:
 		And the user should be able to see the selected options as headers next to Manage Filters button
 		And the user should be able to click the "Odometer Value" item
 		And the user should be able to click the "Equals" option
-		And the user should be able to put "52" "Equals" into the equals textboxes on the odometer value item
-		And the user should be able to put Update button
-		And the user should be able to see only include "52" odometers	
+		And the user should be able to put "125,000" "Equals" into the equals textboxes on the odometer value item
+		And the user should be able to click Update button
+		And the user should be able to see only include "125,000" odometers
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -369,8 +367,8 @@ Feature:
 		And the user should be able to click the "Odometer Value" item
 		And the user should be able to click the "Equals" option
 		And the user should be able to put "999" "Equals" into the equals textboxes on the odometer value item
-		And the user should be able to click "Update" button
-		And the user should NOT be able to see any odometers	
+		And the user should be able to click Update button
+		And the user should NOT be able to see any odometers
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -385,7 +383,7 @@ Feature:
 	#*3-Truck driver can refresh the page by using Refresh button*
 	#4-Truck driver can reset the filtering settings by using Reset button
 	@TRAN-252 @TRAN-247
-	Scenario: US-017 | Truck driver can refresh the tablo 
+	Scenario: US-017 | Truck driver can refresh the tablo
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Grid Settings" button
 		And the user should be able to see "Grid Settings" window
@@ -393,7 +391,7 @@ Feature:
 		And the user should be able to click "x" button on the "Grid Settings" window
 		And the user should be able to see the selected options as headers on the table
 		And the user should be able to click "Refresh" button
-		And the page should be refreshed	
+		And the page should be refreshed
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -408,7 +406,7 @@ Feature:
 	#3-Truck driver can refresh the page by using Refresh button
 	#*4-Truck driver can reset the filtering settings by using Reset button*
 	@TRAN-253 @TRAN-269 @TRAN-247
-	Scenario: US-017 | Truck driver can reset the tablo 
+	Scenario: US-017 | Truck driver can reset the tablo
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Grid Settings" button
 		And the user should be able to see "Grid Settings" window
