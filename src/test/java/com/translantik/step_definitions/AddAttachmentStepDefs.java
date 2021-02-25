@@ -27,17 +27,12 @@ public class AddAttachmentStepDefs {
     }
     @When("User clicks on any vehicle information")
     public void user_clicks_on_any_vehicle_information() {
+
         expectedSubtitle=new VehicleOdometerPage().driverName.getText();
         BrowserUtils.waitFor(10);
         new Actions(Driver.get()).moveToElement(new VehicleOdometerPage().threeDots).perform();
         new VehicleOdometerPage().view.click();
   }
-
-    @Then("User verifies that information page opened")
-    public void user_verifies_that_information_page_opened() {
-        String actualSubtitle= new VehicleInformationPage().driverName.getText();
-        Assert.assertEquals(expectedSubtitle,actualSubtitle);
-    }
 
     @When("User clicks on Add Attachment button on the right top corner of the page")
     public void user_clicks_on_Add_Attachment_button_on_the_right_top_corner_of_the_page() throws InterruptedException {
