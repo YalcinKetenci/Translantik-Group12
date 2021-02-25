@@ -49,7 +49,7 @@ public class US_022_TruckDriverOdometerDeleteFunctionStepDefs {
 
     @Then("User verifies that selected line is deleted and Vehicle Odometer Deleted message can be seen on top of the page")
     public void user_verifies_that_selected_line_is_deleted_and_Vehicle_Odometer_Deleted_message_can_be_seen_on_top_of_the_page() {
-
+        System.out.println("hello");
     }
 }
 
