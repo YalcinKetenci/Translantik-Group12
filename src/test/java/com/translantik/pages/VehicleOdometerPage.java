@@ -2,14 +2,11 @@ package com.translantik.pages;
 
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
-import io.cucumber.java.an.E;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +28,10 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "(//table)[2]/tbody/tr/td[1]/label")
     public List<WebElement> namesOfTheDataOnTheGridSettings;
 
-    @FindBy(xpath = "//*[text()='Select All']")
+    @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']/li/label/span")
+    public List<WebElement> namesOfTheDataOnTheManageFilters;
+
+    @FindBy(xpath = "//div[@class='column-manager-actions']/a")
     public WebElement selectAll;
 
     @FindBy(xpath = "//*[@class='column-filter-renderable-tab active']")
@@ -40,7 +40,7 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//*[@class='column-filter-renderable-tab']")
     public WebElement Selected;
 
-    @FindBy(xpath = "//table[@class='grid table-hover table table-bordered table-condensed']//th/a/span")
+    @FindBy(xpath = "//table[@class='grid table-hover table table-bordered table-condensed']//th[starts-with(@class,'grid-cell grid-header-cell grid-header-cell')]/a/span[1]")
     public List<WebElement> mainTableHeaders;
 
     @FindBy(css = "td.action-cell.grid-cell.grid-body-cell")
@@ -61,30 +61,28 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//button[@class='ui-multiselect ui-corner-all select-filter-widget']/a")
     public WebElement manageFiltersButton;
 
-    @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']//label/span")
-    public List<WebElement> nameOfTheDataOnTheManageFilters;
+    @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']/li")
+    public List<WebElement> dataOnTheManageFilters;
 
     @FindBy(xpath = "//span[@class='filter-items']/div/div[1]")
     public List<WebElement> filterItems;
 
+    @FindBy(xpath = "//*[@class='filter-start']/input")
+    public WebElement equalsInput;
 
-    public WebElement clickTheButton(String buttonTitle){
+    @FindBy(xpath = "//*[@id='OdometerValue']/..//button")
+    public WebElement updateButton;
+
+    @FindBy(xpath = "//div[@class='no-data']/span")
+    public WebElement noDataAlert;
+
+
+    public void clickTheButton(String buttonTitle){
         waitUntilLoaderScreenDisappear();
         WebElement btn;
-        try {
-
-            btn = Driver.get().findElement(By.xpath("//*[@title='" + buttonTitle + "']"));
-            btn.click();
-        }catch (NoSuchElementException e){
-            btn = Driver.get().findElement(By.xpath("//*[.='" + buttonTitle + "']"));
-            btn.click();
-        }
-
-
-        return btn;
-
-
-        }
+        btn = Driver.get().findElement(By.xpath("//*[@title='" + buttonTitle + "']"));
+        btn.click();
+    }
 
     public WebElement getWindow(String windowName){
 
@@ -155,6 +153,28 @@ public class VehicleOdometerPage extends BasePage {
     public WebElement getManageFiltersCheckBoxes(String filterName){
         BrowserUtils.waitFor(1);
         return Driver.get().findElement(By.xpath("//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']//*[@title='"+filterName+"']//input"));
+    }
+
+    public void chooseOdometerValueDropDown(String data){
+        Actions actions = new Actions(Driver.get());
+        actions.moveToElement(Driver.get().findElement(By.xpath("//button[@class='btn dropdown-toggle']"))).click().perform();
+        Driver.get().findElement(By.xpath("(//span//ul[@class='dropdown-menu'])[1]/li/a[.='"+data.toLowerCase()+"']")).click();
+    }
+
+    public List<WebElement> getTheDataBaseOnTheMainTableHeaders(){
+        return Driver.get().findElements(By.xpath("//table[@class='grid table-hover table table-bordered table-condensed']//td[2]"));
+    }
+
+    public List<WebElement> getNamesOfTheDataBasedOnTheWindow(String windowName){
+        switch (windowName.toLowerCase()){
+            case "grid settings":
+                return namesOfTheDataOnTheGridSettings;
+            case "manage filters":
+                return namesOfTheDataOnTheManageFilters;
+            default:
+                System.out.println("Invalid window name | getNamesOfTheDataOnTheBasedOnTheWindow method");
+                return null;
+        }
     }
 
 }
