@@ -11,6 +11,9 @@ public class VehicleInformationPage extends BasePage{
     @FindBy(xpath = "//a[@title='Add attachment']")
     public WebElement addAttachmentButton;
 
+    @FindBy(css = "span.ui-dialog-title")
+    public WebElement titleAddAttachment;
+
     @FindBy(css = "div.uploader.input-widget-file")
     public WebElement chooseFile;
 
