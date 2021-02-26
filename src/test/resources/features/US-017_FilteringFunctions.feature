@@ -143,6 +143,7 @@ Feature:
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Grid Settings" button
 		And the user should be able to see "Grid Settings" window
+		And the user should be able to click "Selected" button on the "Grid Settings" window
 		And the user should be able to click "All" button on the "Grid Settings" window
 		And the user should be able to see the all given options on the "Grid Settings" window
 		| Id             |
