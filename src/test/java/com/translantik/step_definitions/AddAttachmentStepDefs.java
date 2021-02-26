@@ -40,12 +40,7 @@ public class AddAttachmentStepDefs {
         Assert.assertEquals(expectedSubtitle,actualSubtitle);
 
     }
-    @Then("User verifies that information page opened")
-    public void user_verifies_that_information_page_opened() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
 
-    }
 
     @When("User clicks on Add Attachment button on the right top corner of the page")
     public void user_clicks_on_Add_Attachment_button_on_the_right_top_corner_of_the_page() throws InterruptedException {
