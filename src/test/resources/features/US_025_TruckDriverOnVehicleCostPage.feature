@@ -1,4 +1,5 @@
-Feature: 
+@US_025
+Feature:
 
 	Background:
 		#@TRAN-233
@@ -21,8 +22,8 @@ Feature:
 	# 4-Truck driver can get all informations to her/his own email address by using Export Grid button in csv and xlsx formats
 	@TRAN-259 @TRAN-269 @TRAN-264
 	Scenario:  US-025 Truck Driver Vehicle Costs Page Test
-		When the user navigates to "Fleet" tab and "Vehicle Cost" module
-		Then the user able to see information on "Vehıcle Cost" page	
+		When The user click "Fleet" tab and "Vehicle Costs"
+		Then the user able to get following vehicle costs information
 
 	#*User Story :* 
 	#
@@ -38,8 +39,11 @@ Feature:
 	# 4-Truck driver can get all informations to her/his own email address by using Export Grid button in csv and xlsx formats
 	@TRAN-261 @TRAN-264
 	Scenario:  US-025 Truck Driver Change Page Number on Vehicle Costs Page Test
-		When the user change page on "Vehicle Cost" module
-		Then the user able to get following vehicle costs informations	
+		When The user click "Fleet" tab and "Vehicle Costs"
+		Then the user able to get following vehicle costs information
+		Then the user change page group as "10" 
+		Then the user able to change page by click right button
+		Then the user able to change page by click left button
 
 	#*User Story :* 
 	#
@@ -55,15 +59,17 @@ Feature:
 	# 4-Truck driver can get all informations to her/his own email address by using Export Grid button in csv and xlsx formats
 	@TRAN-262 @TRAN-264
 	Scenario Outline:  US-025 Truck Driver Change the Entity Number by Dropdown(10,25,50,100) on Vehicle Costs Page Test
-		When the user change page on "Vehicle Costs" module
-		Then the user change entity number by clicking the view per page dropdown by "<page_number>"
+		When The user click "Fleet" tab and "Vehicle Costs"
+		Then the user able to get following vehicle costs information
+		Then the user change entity number by clicking the view per page dropdown by "<page_number>" 
+		
 		Examples:
 		|page_number|
 		|10|
 		|25|
 		|50|
 		|100|
-		#Then the user able to see the number of selected dropdown
+			
 
 	#*User Story :* 
 	#
@@ -78,7 +84,11 @@ Feature:
 	# 3-Truck driver can change the entity number by clicking the View Per Page dropdown(10,25,50,100)
 	# {color:#de350b}*4-Truck driver can get all informations to her/his own email address by using Export Grid button in csv and xlsx formats*{color}
 	@TRAN-263 @TRAN-264
-	Scenario:  US-025 Truck Driver Use Export Grid Button in csv and xlsx Formats on Vehicle Costs Page Test
-		When the user click export grid 
-		Then the user able to select "CSV" "XLSX
-		Then the user can get all information via e-mail
+	Scenario Outline:  US-025 Truck Driver Use Export Grid Button in csv and xlsx Formats on Vehicle Costs Page Test
+		When The user click "Fleet" tab and "Vehicle Costs"
+		Then the user able to get following vehicle costs information
+		Then the user able to select by "<export_type>"
+		Examples:
+		|export_type|
+		|CSV|
+		|XLSX|
