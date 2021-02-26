@@ -1,3 +1,4 @@
+@US_020
 Feature:
 
 	Background:
@@ -17,6 +18,6 @@ Feature:
 	#
 	#1-Truck Driver can see all informations about specific vehicle odometer.
 	@TRAN-234
-	Scenario: US-20 Truck driver can see al odometer informations test
-		When the user navigates to "Fleet" "Vehicle Odometer"
-		Then the user able to see information on Vehicle Odometer
+	Scenario: US-20 Truck driver can see all odometer informations test
+		When The user click "Fleet" tab and "Vehicle Odometer"
+		Then User should be able to see all information on page

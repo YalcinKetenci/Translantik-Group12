@@ -11,22 +11,34 @@ import java.util.List;
 
 public class VehicleCostPage extends BasePage {
 
-    @FindBy(className = "fa-chevron-right hide-text")
+    @FindBy(className = "oro-subtitle")
+    public WebElement cost_page_title;
+
+    @FindBy(xpath = "//i[@class='fa-chevron-right hide-text']")
     public WebElement change_page_right;
 
-    @FindBy(className = "fa-chevron-left hide-text")
+    @FindBy(xpath = "//i[@class='fa-chevron-left hide-text']")
     public WebElement change_page_left;
 
-    @FindBy(className = "btn-group open")
+    @FindBy(css = "button.btn.dropdown-toggle" )
     public WebElement btn_group_open;
 
-    @FindBy(className = "dropdown-item")
+    @FindBy(xpath = "//a[@class='dropdown-item']")
     public List<WebElement> page_show_number;
+
+    @FindBy(css = "a.action.btn.mode-text-only.dropdown-toggle")
+    public WebElement export_grid;
+
+    @FindBy(css = "a[title='CSV']")
+    public WebElement export_CSV;
+
+    @FindBy(css = "a[title='XLSX']")
+    public WebElement export_XLSX;
+
 
     public String click_page_group_number(String data) {
 
-        new VehicleCostPage().waitUntilLoaderScreenDisappear();
-        BrowserUtils.waitForClickablility(btn_group_open,5);
+
 
         btn_group_open.click();
         BrowserUtils.waitFor(1);
@@ -50,6 +62,27 @@ public class VehicleCostPage extends BasePage {
                 return btn_group_open.getText();
             default:
                 return "invalid data";
+
+        }
+
+    }
+
+    public void export_Vehicle_Costs_page_information(String data){
+        export_grid.click();
+        BrowserUtils.waitFor(1);
+
+        switch (data){
+        case "CSV":
+            BrowserUtils.waitFor(1);
+            export_CSV.click();
+            BrowserUtils.waitFor(2);
+            break;
+        case "XLSX":
+            BrowserUtils.waitFor(1);
+            export_XLSX.click();
+            BrowserUtils.waitFor(2);
+            default:
+                System.out.println("Invalid export file");
 
         }
 
