@@ -84,17 +84,9 @@ public class US_017_FilteringFunctionsStepDef {
     @Then("the user should be able to click {string} button on the {string} window")
     public void the_user_should_be_able_to_click_button_on_the_window(String buttonName, String windowName) {
         Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
-        BrowserUtils.waitFor(1);
-        try {
-            if (buttonName.equalsIgnoreCase("select all")){
-                Actions act = new Actions(Driver.get());
-                act.moveToElement(new VehicleOdometerPage().getGridSettingsButton(buttonName)).pause(500).click(new VehicleOdometerPage().getGridSettingsButton(buttonName)).perform();
-            }else {
-                new VehicleOdometerPage().getGridSettingsButton(buttonName).click();
-            }
-        }catch (ElementClickInterceptedException e) {
-            System.out.println(buttonName + " already clicked.");
-        }
+           Actions act = new Actions(Driver.get());
+           act.moveToElement(new VehicleOdometerPage().getGridSettingsButton(buttonName)).pause(500).click(new VehicleOdometerPage().getGridSettingsButton(buttonName)).pause(500).perform();
+
     }
 
     @Then("the user should be able to select all given options")

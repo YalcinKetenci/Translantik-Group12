@@ -34,10 +34,10 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//div[@class='column-manager-actions']/a")
     public WebElement selectAll;
 
-    @FindBy(xpath = "//*[@class='column-filter-renderable-tab active']")
+    @FindBy(xpath = "//*[@class='column-manager-filter']/a[1]")
     public WebElement All;
 
-    @FindBy(xpath = "//*[@class='column-filter-renderable-tab']")
+    @FindBy(xpath = "//*[@class='column-manager-filter']/a[2]")
     public WebElement Selected;
 
     @FindBy(xpath = "//table[@class='grid table-hover table table-bordered table-condensed']//th[starts-with(@class,'grid-cell grid-header-cell grid-header-cell')]/a/span[1]")
