@@ -10,19 +10,17 @@ import org.openqa.selenium.By;
 
 public class US_020_TruckDriverCanSeeAllOdometerInformation {
 
-    @When("the user navigates to {string} tab and {string} module")
-    public void the_user_navigates_to_tab_and_module(String tab, String module) {
-        new Dashboard().navigateToModule(tab, module);
-        new Dashboard().waitUntilLoaderScreenDisappear();
 
+
+    @When("The user click {string} tab and {string}")
+    public void theUserClickTabAnd(String arg0, String arg1) {
+        new Dashboard().navigateToModule(arg0,arg1);
+        new Dashboard().waitUntilLoaderScreenDisappear();
     }
 
-    @Then("the user able to see information on Vehicle Odometer")
-    public void the_user_able_to_see_information_on_Vehicle_Odometer() {
+    @Then("User should be able to see all information on page")
+    public void userShouldBeAbleToSeeAllInformationOnPage() {
         Assert.assertEquals(Driver.get().findElement(By.className("oro-subtitle")).getText(), "Vehicles Odometers");
-
-
-
     }
 }
 
