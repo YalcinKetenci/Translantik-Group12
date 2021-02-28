@@ -20,7 +20,10 @@ public class VehicleInformationPage extends BasePage{
     @FindBy(css = "button.btn.btn-primary")
     public WebElement saveButton;
 
-    public String filetxt= "C:\\Users\\Asus\\Desktop\\translantik.txt";
+    @FindBy(xpath = "//div[@class='pull-right title-buttons-container']/div[2]/div/button[@type='submit']")
+    public WebElement saveAndClose;
+
+//    public String filetxt= "C:\\Users\\Asus\\Desktop\\translantik.txt";
 
 //    public String filePath(){
 //        String filetxt= "C:\\Users\\Asus\\Desktop\\translantik.txt";

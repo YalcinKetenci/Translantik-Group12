@@ -76,6 +76,17 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(xpath = "//div[@class='no-data']/span")
     public WebElement noDataAlert;
 
+    @FindBy(css = "input[name='custom_entity_type[OdometerValue]']")
+    public WebElement odometerValue;
+
+    @FindBy(css = ".datepicker-input.hasDatepicker")
+    public WebElement dateInput;
+
+    @FindBy(css = ".btn.btn-medium.add-btn")
+    public WebElement addButton;
+
+    @FindBy(css = ".ui-dialog-title")
+    public WebElement selectCarreserv;
 
     public void clickTheButton(String buttonTitle){
         waitUntilLoaderScreenDisappear();

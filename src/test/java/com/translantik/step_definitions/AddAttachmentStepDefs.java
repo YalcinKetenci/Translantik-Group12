@@ -28,6 +28,13 @@ public class AddAttachmentStepDefs {
         dashboard.navigateToModule(tab, module);
 
     }
+
+    @Then("User verifies that Vehicles Odometers page opened")
+    public void user_verifies_that_page_opened() {
+        Assert.assertEquals("Vehicles Odometers",Driver.get().findElement(By.className("oro-subtitle")).getText());
+
+    }
+
     @When("User clicks on any vehicle information")
     public void user_clicks_on_any_vehicle_information() {
         expectedSubtitle=vehicleOdometerPage.driverName.getText();
@@ -39,27 +46,29 @@ public class AddAttachmentStepDefs {
     @Then("User verifies that information page opened")
     public void user_verifies_that_information_page_opened() {
         VehicleInformationPage vehicleInformationPage=new VehicleInformationPage();
-        String actualSubtitle= vehicleInformationPage.titleAddAttachment.getText();
+        String actualSubtitle= vehicleInformationPage.driverName.getText();
         Assert.assertEquals(expectedSubtitle,actualSubtitle);
     }
 
     @When("User clicks on Add Attachment button on the right top corner of the page")
     public void user_clicks_on_Add_Attachment_button_on_the_right_top_corner_of_the_page(){
-        BrowserUtils.waitForClickablility(new VehicleInformationPage().addAttachmentButton,20);
+//        BrowserUtils.waitForClickablility(new VehicleInformationPage().addAttachmentButton,20);
         new VehicleInformationPage().addAttachmentButton.click();
 
     }
     @Then("User verifies that {string} popup windows opened")
     public void user_verifies_that_Add_Attachment_popup_windows_opened(String expectedTitle) {
         VehicleInformationPage vehicleInformationPage=new VehicleInformationPage();
+        BrowserUtils.waitForVisibility(vehicleInformationPage.titleAddAttachment,10);
         String actualTitle=vehicleInformationPage.titleAddAttachment.getText();
         Assert.assertEquals(expectedTitle,actualTitle);
     }
     @When("User clicks to Choose File button on the popup window and selects a file from computer")
     public void user_clicks_to_Choose_File_button_on_the_popup_window() {
         VehicleInformationPage vehicleInformationPage=new VehicleInformationPage();
-        BrowserUtils.waitFor(3000);
-        vehicleInformationPage.chooseFile.sendKeys("C:\\Users\\Asus\\Pictures\\Saved Pictures\\google office.jpg");
+        BrowserUtils.waitFor(10);
+        vehicleInformationPage.chooseFile.click();
+        vehicleInformationPage.chooseFile.sendKeys("C:\\Users\\Asus\\Pictures\\Saved Pictures\\google office.jpg",Keys.ENTER);
 
     }
 
