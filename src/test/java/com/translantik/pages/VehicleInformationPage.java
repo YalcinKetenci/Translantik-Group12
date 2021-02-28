@@ -11,13 +11,19 @@ public class VehicleInformationPage extends BasePage{
     @FindBy(xpath = "//a[@title='Add attachment']")
     public WebElement addAttachmentButton;
 
+    @FindBy(css = "span.ui-dialog-title")
+    public WebElement titleAddAttachment;
+
     @FindBy(css = "div.uploader.input-widget-file")
     public WebElement chooseFile;
 
     @FindBy(css = "button.btn.btn-primary")
     public WebElement saveButton;
 
-    public String filetxt= "C:\\Users\\Asus\\Desktop\\translantik.txt";
+    @FindBy(xpath = "//div[@class='pull-right title-buttons-container']/div[2]/div/button[@type='submit']")
+    public WebElement saveAndClose;
+
+//    public String filetxt= "C:\\Users\\Asus\\Desktop\\translantik.txt";
 
 //    public String filePath(){
 //        String filetxt= "C:\\Users\\Asus\\Desktop\\translantik.txt";
