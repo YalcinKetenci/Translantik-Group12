@@ -1,5 +1,6 @@
 package com.translantik.step_definitions;
 
+import com.translantik.pages.Dashboard;
 import com.translantik.pages.VehicleOdometerPage;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
@@ -50,6 +51,12 @@ public class US_022_TruckDriverOdometerDeleteFunctionStepDefs {
     @Then("User verifies that selected line is deleted and Vehicle Odometer Deleted message can be seen on top of the page")
     public void user_verifies_that_selected_line_is_deleted_and_Vehicle_Odometer_Deleted_message_can_be_seen_on_top_of_the_page() {
         System.out.println("hello");
+    }
+
+    @When("User navigated to {string} tab {string} module")
+    public void user_navigated_to_tab_modules(String tab, String module) {
+        new Dashboard().navigateToModule(tab, module);
+
     }
 }
 
