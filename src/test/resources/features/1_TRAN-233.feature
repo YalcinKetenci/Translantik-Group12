@@ -15,7 +15,7 @@ Feature:
 	#
 	#*1-Truck driver can create vehicle odometer by using Create Vehicle Odometer button*
 	#2-Truck driver can also add Licence plate information by using +Add button when creating vehicle odometer
-	@TRAN-272 @TRAN-271
+	@TRAN-272 @TRAN-271 @smoke
 	Scenario: Truck driver can create vehicle odometer
 		Given User navigated to "Fleet" tab "Vehicle Odometer" module
 		Then User verifies that Vehicles Odometers page opened
