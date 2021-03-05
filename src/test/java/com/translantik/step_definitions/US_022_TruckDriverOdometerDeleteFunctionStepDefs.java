@@ -53,9 +53,9 @@ public class US_022_TruckDriverOdometerDeleteFunctionStepDefs {
         System.out.println("hello");
     }
 
-    @When("User navigated to {string} tab {string} module")
-    public void user_navigated_to_tab_modules(String tab, String module) {
-        new Dashboard().navigateToModule(tab, module);
+//    @When("User navigated to {string} tab {string} module")
+//    public void user_navigated_to_tab_modules(String tab, String module) {
+//        new Dashboard().navigateToModule(tab, module);
 
-    }
+   // }
 }
