@@ -108,7 +108,7 @@ public class US_017_FilteringFunctionsStepDef {
 
         List<String> headers = new ArrayList<>();
         for (WebElement header : new VehicleOdometerPage().mainTableHeaders) {
-            if (!header.getText().isBlank()) {
+            if (!header.getText().isEmpty()) {
                 headers.add(header.getText().toLowerCase());
             }
         }
@@ -212,7 +212,7 @@ public class US_017_FilteringFunctionsStepDef {
     @Then("the user should NOT be able to see the selected options as headers next to Manage Filters button")
     public void the_user_should_NOT_be_able_to_see_the_selected_options_as_headers_next_to_Manage_Filters_button() {
         for (WebElement filterItem : new VehicleOdometerPage().filterItems) {
-            Assert.assertTrue(filterItem.getText().isBlank());
+            Assert.assertTrue(filterItem.getText().isEmpty());
         }
     }
 
