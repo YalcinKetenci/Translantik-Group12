@@ -35,6 +35,12 @@ public class VehicleCostPage extends BasePage {
     @FindBy(css = "a[title='XLSX']")
     public WebElement export_XLSX;
 
+    @FindBy(partialLinkText = "Create Vehicle Costs")
+    public WebElement createVehicleCostsButton;
+
+    @FindBy(xpath = "//a[@class='btn-success btn dropdown-toggle']")
+    public WebElement saveAndCloseButton;
+
 
     public String click_page_group_number(String data) {
 
