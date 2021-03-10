@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.tr.Ve;
 import org.junit.Assert;
+import org.openqa.selenium.interactions.Actions;
 
 public class US_25_StepDefinition {
 
@@ -37,6 +38,7 @@ public class US_25_StepDefinition {
     }
     @Then("the user change entity number by clicking the view per page dropdown by {string}")
     public void the_user_change_entity_number_by_clicking_the_view_per_page_dropdown_by(String string) {
+        new VehicleCostPage().scrollToElementWithJS(new VehicleCostPage().btn_group_open);
         new VehicleCostPage().click_page_group_number(string);
 
     }
