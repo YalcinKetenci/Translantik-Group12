@@ -7,7 +7,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-public class US_29_SalesManagerStoreManagerWidgetPinFavStepDefs {
+public class US_035_SalesManagerStoreManagerWidgetPinFavStepDefs {
 
 
     @When("the user clicks plus button")
