@@ -34,6 +34,7 @@ public class US_017_FilteringFunctionsStepDef {
     public void the_user_should_be_able_to_click_button(String buttonName) {
         pageHtml=Driver.get().getCurrentUrl();
         new VehicleOdometerPage().clickTheButton(buttonName);
+        BrowserUtils.waitFor(1);
     }
 
     @Then("the user should be able to see {string} window")
@@ -101,6 +102,7 @@ public class US_017_FilteringFunctionsStepDef {
 
         List<String> selectedOptions = new ArrayList<>();
         for (WebElement name : new VehicleOdometerPage().namesOfTheDataOnTheGridSettings) {
+
             if (new VehicleOdometerPage().getGridSettingsCheckBoxes(name.getText()).isSelected()) {
                 selectedOptions.add(name.getText().toLowerCase());
             }
