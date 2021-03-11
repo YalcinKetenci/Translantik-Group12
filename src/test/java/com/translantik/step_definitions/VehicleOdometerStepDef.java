@@ -1,15 +1,15 @@
 package com.translantik.step_definitions;
 
 import com.translantik.pages.Dashboard;
+import com.translantik.pages.VehicleInformationPage;
 import com.translantik.pages.VehicleOdometerPage;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
-
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 import org.junit.Assert;
-import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,12 +18,155 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.List;
 
-public class US_017_FilteringFunctionsStepDef {
-
+public class VehicleOdometerStepDef {
     public String enteredDataIntoGridSettings;
     public String enteredDataIntoManageFilters;
     public String pageHtml;
+    VehicleOdometerPage vehicleOdometerPage=new VehicleOdometerPage();
+    String expectedSubtitle=null;
+    Dashboard dashboard=new Dashboard();
 
+    //US_19 Mr. Nurullah ALP EKIN
+    @When("User clicks {string} CVO button")
+    public void user_clicks_CVO_button(String button) {
+        vehicleOdometerPage.clickTheButton(button);
+    }
+
+
+    @Then("User verifies that Create Vehicle Odometer page opened")
+    public void user_verifies_create_page_opened() {
+        Assert.assertEquals("Create Vehicle Odometer", Driver.get().findElement(By.cssSelector(".user-name")).getText());
+    }
+
+    @When("User clicks Save And Close button")
+    public void user_clicks_Save_And_Close_button() {
+        BrowserUtils.waitFor(5);
+        new VehicleInformationPage().saveAndClose.click();
+    }
+
+    @Then("User verifies that Entity Saved message can be seen on page")
+    public void userVerifiesThatEntitySavedMessageCanBeSeenOnPage() {
+        WebElement entitySaved= Driver.get().findElement(By.cssSelector(".alert.alert-success.fade.top-messages"));
+        Assert.assertTrue(entitySaved.isEnabled());
+    }
+
+    @When("User clicks {string} cncl button")
+    public void user_clicks_cncl_button(String cancel) {
+        new VehicleOdometerPage().clickTheButton(cancel);
+    }
+
+    @When("User inserts {string} to Odometer Value inbox")
+    public void user_inserts_to_Odometer_Value_inbox(String insertChar) {
+        BrowserUtils.waitForVisibility(vehicleOdometerPage.odometerValue,10);
+        vehicleOdometerPage.odometerValue.sendKeys(insertChar);
+    }
+
+    @Then("User gets {string} message for Odometer Value")
+    public void user_gets_message_for_Odometer_Value(String valueNotValid) {
+        Assert.assertEquals(valueNotValid,Driver.get().findElement(By.cssSelector(".validation-failed")).getText());
+        vehicleOdometerPage.odometerValue.clear();
+    }
+
+    @When("User inserts {string} to Date inbox")
+    public void user_inserts_to_Date_inbox(String dateInbox) {
+        vehicleOdometerPage.dateInput.sendKeys(dateInbox);
+    }
+
+    @Then("User gets {string} message for Date")
+    public void user_gets_message_for_Date(String dateNotValid) {
+        Assert.assertEquals(dateNotValid,Driver.get().findElement(By.cssSelector(".validation-failed")).getText());
+    }
+
+    @When("User clicks +Add button on the same line of License Plate")
+    public void user_clicks_Add_button_on_the_same_line_of_License_Plate() {
+        vehicleOdometerPage.addButton.click();
+    }
+
+    @Then("User verifies that a new window titled {string} opened")
+    public void user_verifies_that_a_new_window_titled_opened(String carReservation) {
+        BrowserUtils.waitForVisibility(vehicleOdometerPage.selectCarreserv,10);
+        Assert.assertEquals(carReservation,vehicleOdometerPage.selectCarreserv.getText());
+    }
+
+    @When("User clicks checkbox of {string}")
+    public void user_clicks_checkbox_of(String plate) {
+
+        Driver.get().findElement(By.xpath("//td[contains(text(),'123456')]/preceding-sibling::td/input[@type='checkbox']")).click();
+    }
+
+    @When("User clicks Select button")
+    public void user_clicks_Select_button() {
+        Driver.get().findElement(By.cssSelector(".btn.btn-primary")).click();
+    }
+
+    @Then("User verifies that selected {string} can be seen on Create Vehicle Odometer page")
+    public void user_verifies_that_selected_can_be_seen_on_Create_Vehicle_Odometer_page(String plate) {
+        Assert.assertEquals(plate,Driver.get().findElement(By.cssSelector(".extra-info")).getText());
+    }
+
+    @Then("User verifies that selected licence plate {string} can be seen on General Information page")
+    public void user_verifies_that_selected_licence_plate_can_be_seen_on_General_Information_page(String plate) {
+        Assert.assertEquals(plate,Driver.get().findElement(By.cssSelector("a[title='"+plate+"']")).getText());
+    }
+    @When("User navigated to {string} tab {string} module")
+    public void user_navigated_to_tab_module(String tab, String module) {
+        dashboard.navigateToModule(tab, module);
+
+    }
+
+    @Then("User verifies that Vehicles Odometers page opened")
+    public void user_verifies_that_page_opened() {
+        Assert.assertEquals("Vehicles Odometers",Driver.get().findElement(By.className("oro-subtitle")).getText());
+
+    }
+
+    @When("User clicks on any vehicle information")
+    public void user_clicks_on_any_vehicle_information() {
+        expectedSubtitle=vehicleOdometerPage.driverName.getText();
+        BrowserUtils.waitFor(10);
+        new Actions(Driver.get()).moveToElement(vehicleOdometerPage.threeDots).perform();
+        vehicleOdometerPage.view.click();
+    }
+
+    @Then("User verifies that information page opened")
+    public void user_verifies_that_information_page_opened() {
+        VehicleInformationPage vehicleInformationPage=new VehicleInformationPage();
+        String actualSubtitle= vehicleInformationPage.driverName.getText();
+        Assert.assertEquals(expectedSubtitle,actualSubtitle);
+    }
+
+    @When("User clicks on Add Attachment button on the right top corner of the page")
+    public void user_clicks_on_Add_Attachment_button_on_the_right_top_corner_of_the_page(){
+//        BrowserUtils.waitForClickablility(new VehicleInformationPage().addAttachmentButton,20);
+        new VehicleInformationPage().addAttachmentButton.click();
+
+    }
+    @Then("User verifies that {string} popup windows opened")
+    public void user_verifies_that_Add_Attachment_popup_windows_opened(String expectedTitle) {
+        VehicleInformationPage vehicleInformationPage=new VehicleInformationPage();
+        BrowserUtils.waitForVisibility(vehicleInformationPage.titleAddAttachment,10);
+        String actualTitle=vehicleInformationPage.titleAddAttachment.getText();
+        Assert.assertEquals(expectedTitle,actualTitle);
+    }
+    @When("User clicks to Choose File button on the popup window and selects a file from computer")
+    public void user_clicks_to_Choose_File_button_on_the_popup_window() {
+        VehicleInformationPage vehicleInformationPage=new VehicleInformationPage();
+        BrowserUtils.waitFor(10);
+        vehicleInformationPage.chooseFile.click();
+        vehicleInformationPage.chooseFile.sendKeys("C:\\Users\\Asus\\Pictures\\Saved Pictures\\google office.jpg", Keys.ENTER);
+
+    }
+
+    @When("User clicks to Save button on the popup window")
+    public void user_clicks_to_Save_button_on_the_popup_window() {
+        new VehicleInformationPage().saveButton.click();
+    }
+    @Then("User verifies that selected file is uploaded and can be seen under Attachments")
+    public void user_verifies_that_selected_file_is_uploaded_and_can_be_seen_under_Attachments() {
+
+    }
+
+    //US_017 --> Filtering Functions
     @When("the user navigates to {string} {string}")
     public void the_user_navigates_to(String tab, String module) {
         new Dashboard().navigateToModule(tab,module);
@@ -85,8 +228,8 @@ public class US_017_FilteringFunctionsStepDef {
     @Then("the user should be able to click {string} button on the {string} window")
     public void the_user_should_be_able_to_click_button_on_the_window(String buttonName, String windowName) {
         Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
-           Actions act = new Actions(Driver.get());
-           act.moveToElement(new VehicleOdometerPage().getGridSettingsButton(buttonName)).pause(500).click(new VehicleOdometerPage().getGridSettingsButton(buttonName)).pause(500).perform();
+        Actions act = new Actions(Driver.get());
+        act.moveToElement(new VehicleOdometerPage().getGridSettingsButton(buttonName)).pause(500).click(new VehicleOdometerPage().getGridSettingsButton(buttonName)).pause(500).perform();
 
     }
 
@@ -188,7 +331,7 @@ public class US_017_FilteringFunctionsStepDef {
             }
         }
         for (String data : dataTable) {
-          Assert.assertTrue(new VehicleOdometerPage().getManageFiltersCheckBoxes(data).isSelected());
+            Assert.assertTrue(new VehicleOdometerPage().getManageFiltersCheckBoxes(data).isSelected());
         }
     }
 
@@ -239,7 +382,7 @@ public class US_017_FilteringFunctionsStepDef {
 
     @Then("the user should be able to click Update button")
     public void the_user_should_be_able_to_click_Update_button() {
-    new VehicleOdometerPage().updateButton.click();
+        new VehicleOdometerPage().updateButton.click();
     }
 
     @Then("the user should be able to see only include {string} odometers")
@@ -290,5 +433,41 @@ public class US_017_FilteringFunctionsStepDef {
     public void the_user_should_be_able_to_click_Manage_filters_button() {
         new VehicleOdometerPage().manageFiltersButton.click();
     }
+
+    //US_020 Truck driver can see all odometer information
+    @When("The user click {string} tab and {string}")
+    public void theUserClickTabAnd(String arg0, String arg1) {
+        new Dashboard().navigateToModule(arg0,arg1);
+        new Dashboard().waitUntilLoaderScreenDisappear();
+    }
+
+    @Then("User should be able to see all information on page")
+    public void userShouldBeAbleToSeeAllInformationOnPage() {
+        Assert.assertEquals(Driver.get().findElement(By.className("oro-subtitle")).getText(), "Vehicles Odometers");
+    }
+
+    //US_022 Truck driver odometer Delete Functions Step Defs
+    @When("User clicks on Delete Vehicle Odometer button on the right top corner of the page")
+    public void user_clicks_on_Delete_Vehicle_Odometer_button_on_the_right_top_corner_of_the_page() {
+        new VehicleOdometerPage().deleteButton.click();
+    }
+
+    @Then("User verifies that Delete Confirmation popup windows opened")
+    public void user_verifies_that_Delete_Confirmation_popup_windows_opened() {
+        Assert.assertEquals(Driver.get().findElement(By.cssSelector("div.modal-header h3")).getText(),"Delete Confirmation");
+    }
+
+    @When("User clicks to Yes, Delete button on the popup window")
+    public void user_clicks_to_Yes_Delete_button_on_the_popup_window() {
+        Driver.get().findElement(By.cssSelector("a.btn.ok.btn-danger")).click();
+    }
+
+//    @Then("User verifies that selected line is deleted and Vehicle Odometer Deleted message can be seen on top of the page")
+//    public void user_verifies_that_selected_line_is_deleted_and_Vehicle_Odometer_Deleted_message_can_be_seen_on_top_of_the_page() {
+//        // Write code here that turns the phrase above into concrete actions
+//        throw new io.cucumber.java.PendingException();
+//    }
+
+
 
 }
