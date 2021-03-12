@@ -4,6 +4,7 @@ import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class VehicleOdometerPage extends BasePage {
 
-    @FindBy(xpath = "(//*[@class='dropdown-menu'])[4]")
+    @FindBy(xpath = "//div[@class='dropdown-menu']")
     public WebElement gridSettingsWindow;
 
     @FindBy(xpath = "//*[@class='ui-multiselect-menu ui-corner-all select-filter-widget dropdown-menu']")
@@ -88,11 +89,28 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(css = ".ui-dialog-title")
     public WebElement selectCarreserv;
 
+
+
     public void clickTheButton(String buttonTitle){
+        WebElement element;
         waitUntilLoaderScreenDisappear();
-        WebElement btn;
-        btn = Driver.get().findElement(By.xpath("//*[@title='" + buttonTitle + "']"));
-        btn.click();
+        BrowserUtils.waitFor(2);
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.get();
+
+        if (buttonTitle.toLowerCase().equals("activity refresh")){
+            new VehicleCostPage().activityRefresh.click();
+        }else {
+            try {
+                 element = Driver.get().findElement(By.xpath("//*[@title='" + buttonTitle + "']"));
+                jse.executeScript("arguments[0].scrollIntoView(true);",element);
+                element.click();
+
+            } catch (Exception e) {
+                 element = Driver.get().findElement(By.xpath("//*[contains(text(),'" + buttonTitle + "')]"));
+                jse.executeScript("arguments[0].scrollIntoView(true);",element);
+                element.click();
+            }
+        }
     }
 
     public WebElement getWindow(String windowName){
@@ -129,21 +147,19 @@ public class VehicleOdometerPage extends BasePage {
     }
 
     public WebElement getGridSettingsButton(String buttonName){
-        switch (buttonName.toLowerCase()){
-            case "selected":
-                return Selected;
-            case "all":
-                return All;
-            case "select all":
-                return selectAll;
-            case"x":
-                return gridSettingsCloseButton;
-            default:
-                System.out.println("Invalid button name");
-                return null;
-        }
-
-
+            switch (buttonName.toLowerCase()) {
+                case "selected":
+                    return Selected;
+                case "all":
+                    return All;
+                case "select all":
+                    return selectAll;
+                case "x":
+                    return gridSettingsCloseButton;
+                default:
+                    System.out.println("Invalid button name");
+                    return null;
+            }
     }
 
     public WebElement getGridSettingsCheckBoxes(String filterName){

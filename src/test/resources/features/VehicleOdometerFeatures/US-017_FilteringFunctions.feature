@@ -177,7 +177,7 @@ Feature:
 		| Driver         |
 		| Unit           |
 		| Model          |
-		And the user should be able to see the selected options as headers on the table	
+		And the user should be able to see the selected options as headers on the table
 
 	#{color:#00875a}*User Story :* {color}
 	#

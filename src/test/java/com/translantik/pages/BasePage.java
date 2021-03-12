@@ -3,6 +3,7 @@ package com.translantik.pages;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
@@ -123,6 +124,11 @@ public abstract class  BasePage {
             new WebDriverWait(Driver.get(),20).until(ExpectedConditions.visibilityOf(loaderMask));
             new WebDriverWait(Driver.get(),20).until(ExpectedConditions.invisibilityOf(loaderMask));
         }catch (Exception e ){}
+    }
+
+    public void scrollToElementWithJS(WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) Driver.get();
+        js.executeScript("arguments[0].scrollIntoView(true);",element);
     }
 
 }
