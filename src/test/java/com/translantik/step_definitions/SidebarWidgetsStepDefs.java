@@ -22,7 +22,6 @@ public class SidebarWidgetsStepDefs {
     public void the_user_verifies_that_sidebar_widgets_page_opened() {
         String expectedWindowTitle = "Sidebar Widgets";
         String actualWindowTitle = vehicleCostPage.windowTitle.getText();
-
         Assert.assertEquals(expectedWindowTitle, actualWindowTitle);
     }
 
