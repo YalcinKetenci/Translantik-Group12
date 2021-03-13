@@ -62,7 +62,7 @@ public class SidebarWidgetsStepDefs {
     @Then("the user verifies that Vehicle Costs page is pinned to pin bar")
     public void the_user_verifies_that_Vehicle_Costs_page_is_pinned_to_pin_bar() {
         String pageTitle= Driver.get().getTitle();
-        String pinnedPage= Driver.get().findElement(By.xpath("//div[@id='pinbar']/div[@class='list-bar']/ul//a")).getText();
+        String pinnedPage= vehicleCostPage.pinBar.getText();
         BrowserUtils.waitFor(2);
         Assert.assertTrue(pageTitle.contains(pinnedPage));
     }
