@@ -108,8 +108,9 @@ public class VehicleCostPage extends BasePage {
     //by alpekin
     @FindBy(css = " div#favorite-content a")
     public WebElement favContent;
-
-
+    //by alpekin
+    @FindBy(xpath = "//div[@id='pinbar']/div[@class='list-bar']/ul//a")
+    public WebElement pinBar;
 
 
     public SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM d,yyyy");
