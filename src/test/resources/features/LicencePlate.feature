@@ -1,4 +1,4 @@
-@LP @wip
+@LP
 Feature: Licence Plate
 
 	Background:
