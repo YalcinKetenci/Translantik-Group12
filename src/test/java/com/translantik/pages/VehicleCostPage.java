@@ -78,6 +78,40 @@ public class VehicleCostPage extends BasePage {
     @FindBy(xpath = "//tbody[@class='ui-sortable']//td[3]/input")
     public List<WebElement> vcGridSettingCheckBoxes;
 
+    //by alpekin
+    @FindBy(xpath = "//div[@id='sidebar-right']/button[@class='sidebar__add-widget']")
+    public WebElement plusIcon;
+    //by alpekin
+    @FindBy(xpath = "//div/div/h3")
+    public WebElement windowTitle;
+    //by alpekin
+    @FindBy(css = ".btn.cancel")
+    public WebElement closeButton;
+    //by alpekin
+    @FindBy(css = ".btn.minimize-button")
+    public WebElement pinIcon;
+    //by alpekin
+    @FindBy(css = ".btn.minimize-button.gold-icon")
+    public WebElement goldIcon;
+    //by alpekin
+    @FindBy(css = ".btn.favorite-button")
+    public WebElement starIcon;
+    //by alpekin
+    @FindBy(css = ".btn.favorite-button.gold-icon")
+    public WebElement goldStar;
+    //by alpekin
+    @FindBy(css = ".fa-bars")
+    public WebElement faBars;
+    //by alpekin
+    @FindBy(css = "#favorite-tab")
+    public WebElement favTab;
+    //by alpekin
+    @FindBy(css = " div#favorite-content a")
+    public WebElement favContent;
+    //by alpekin
+    @FindBy(xpath = "//div[@id='pinbar']/div[@class='list-bar']/ul//a")
+    public WebElement pinBar;
+
 
     public SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM d,yyyy");
 
@@ -184,6 +218,20 @@ public class VehicleCostPage extends BasePage {
                 System.out.println("Invalid Input | from triggerAttachmentsPage method");
         }
     }
-
+    //by alpekin
+    public WebElement addButton(String widgetName){
+        String buttonLocation="//strong[.='"+widgetName+"']//..//../td[4]";
+        return Driver.get().findElement(By.xpath(buttonLocation));
+    }
+    //by alpekin
+    public WebElement addedMessage(String widget){
+        String messageLocation= "//strong[.='"+widget+"']//../span";
+        return Driver.get().findElement(By.xpath(messageLocation));
+    }
+    //by alpekin
+    public WebElement visibleIcon(String iconName){
+        String iconLocation= ".sidebar-widget__icon > i[title='"+iconName+"']";
+        return Driver.get().findElement(By.cssSelector(iconLocation));
+    }
 }
 
