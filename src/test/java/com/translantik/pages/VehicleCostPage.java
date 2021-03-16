@@ -111,6 +111,12 @@ public class VehicleCostPage extends BasePage {
     //by alpekin
     @FindBy(xpath = "//div[@id='pinbar']/div[@class='list-bar']/ul//a")
     public WebElement pinBar;
+    //by ferruh
+    @FindBy(xpath = "//a[normalize-space()='Create Vehicle Costs']")
+    public WebElement createVehicleCostsButton;
+    //by ferruh
+    @FindBy(xpath = "//button[@class='btn btn-success action-button cc_pointer']")
+    public WebElement saveAndCloseButton;
 
 
     public SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM d,yyyy");
