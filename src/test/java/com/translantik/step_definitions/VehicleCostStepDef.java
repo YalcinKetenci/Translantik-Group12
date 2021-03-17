@@ -2,13 +2,16 @@ package com.translantik.step_definitions;
 
 import com.translantik.pages.Dashboard;
 import com.translantik.pages.VehicleCostPage;
+import com.translantik.pages.VehicleOdometerPage;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,6 +21,10 @@ import java.util.Date;
 import java.util.List;
 
 public class VehicleCostStepDef {
+    public String pageHtml;
+    public String enteredDataIntoGridSettings;
+    public String enteredDataIntoManageFilters;
+
 
     //US_025 Mr. Harun ALTINTAS
     @Then("the user able to get following vehicle costs information")
@@ -141,5 +148,71 @@ public class VehicleCostStepDef {
 
         Assert.assertFalse(new VehicleCostPage().vcGridSettingCheckBoxes.get(0).isSelected());
         Assert.assertFalse(new VehicleCostPage().vcGridSettingCheckBoxes.get(1).isSelected());
+    }
+
+
+    @Then("the user click {string} button on {string} page")
+    public void theUserClickButtonOnPage(String buttonName, String pageName) {
+        pageHtml=Driver.get().getCurrentUrl();
+        switch (pageName){
+            case "Vehicle Costs":
+                new VehicleCostPage().clickTheButton(buttonName);
+                BrowserUtils.waitFor(1);
+                break;
+            case "Vehicle Odometer":
+                new VehicleOdometerPage().clickTheButton(buttonName);
+                BrowserUtils.waitFor(1);
+                break;
+            default:
+                System.out.println("Invalid Page");
+        }
+
+    }
+
+    @And("the user should be able to see {string} window on {string} page")
+    public void theUserShouldBeAbleToSeeWindowOnPage(String windowName, String pageName) {
+        switch (pageName){
+            case "Vehicle Costs":
+                Assert.assertTrue(new VehicleCostPage().getWindow(windowName).isDisplayed());
+                break;
+            case "Vehicle Odometer":
+                Assert.assertTrue(new VehicleOdometerPage().getWindow(windowName).isDisplayed());
+                break;
+            default:
+                System.out.println("Invalid Page");
+        }
+
+
+
+
+    }
+
+
+    @Then("user should be able to enters one of the given data inside the text-box on the {string} window")
+    public void userShouldBeAbleToEntersOneOfTheGivenDataInsideTheTextBoxOnTheWindow(String windowName,List<String> data) {
+        new VehicleOdometerPage().getTextBox(windowName).sendKeys(data.get(0));
+        switch (windowName.toLowerCase()){
+            case "grid settings":
+                enteredDataIntoGridSettings= data.get(0);
+                break;
+            case "manage filters":
+                enteredDataIntoManageFilters= data.get(0);
+                break;
+        }
+    }
+
+    @And("the user should be able to see the only options includes the written character on the {string} window")
+    public void theUserShouldBeAbleToSeeTheOnlyOptionsIncludesTheWrittenCharacterOnTheWindow(String windowName) {
+        BrowserUtils.waitFor(1);
+
+        for (WebElement names : new VehicleCostPage().getNamesOfTheDataBasedOnTheWindow(windowName)) {
+            if(names.isDisplayed() && names.isEnabled()) {
+                if (windowName.equalsIgnoreCase("manage filters")) {
+                    Assert.assertEquals(names.getText(), enteredDataIntoManageFilters);
+                }else if (windowName.equalsIgnoreCase("grid settings")){
+                    Assert.assertEquals(names.getText(),enteredDataIntoGridSettings);
+                }
+            }
+        }
     }
 }

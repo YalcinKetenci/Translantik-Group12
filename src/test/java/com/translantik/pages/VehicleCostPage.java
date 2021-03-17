@@ -3,6 +3,7 @@ package com.translantik.pages;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -78,6 +79,20 @@ public class VehicleCostPage extends BasePage {
     @FindBy(xpath = "//tbody[@class='ui-sortable']//td[3]/input")
     public List<WebElement> vcGridSettingCheckBoxes;
 
+    @FindBy(xpath = "//div[@class='dropdown-menu']")
+    public WebElement gridSettingsWindow;
+
+    @FindBy(xpath = "//*[@class='ui-multiselect-menu ui-corner-all select-filter-widget dropdown-menu']")
+    public WebElement manageFiltersWindow;
+
+    @FindBy(xpath = "(//table)[2]/tbody/tr/td[1]/label")
+    public List<WebElement> namesOfTheDataOnTheGridSettings;
+
+    @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']/li/label/span")
+    public List<WebElement> namesOfTheDataOnTheManageFilters;
+
+
+
     //by alpekin
     @FindBy(xpath = "//div[@id='sidebar-right']/button[@class='sidebar__add-widget']")
     public WebElement plusIcon;
@@ -115,7 +130,59 @@ public class VehicleCostPage extends BasePage {
 
     public SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM d,yyyy");
 
+    public void clickTheButton(String buttonTitle){
+        WebElement element;
+        waitUntilLoaderScreenDisappear();
+        BrowserUtils.waitFor(2);
+        JavascriptExecutor jse = (JavascriptExecutor) Driver.get();
 
+        if (buttonTitle.toLowerCase().equals("activity refresh")){
+            new VehicleCostPage().activityRefresh.click();
+        }else {
+            try {
+                element = Driver.get().findElement(By.xpath("//*[@title='" + buttonTitle + "']"));
+                jse.executeScript("arguments[0].scrollIntoView(true);",element);
+                element.click();
+
+            } catch (Exception e) {
+                element = Driver.get().findElement(By.xpath("//*[contains(text(),'" + buttonTitle + "')]"));
+                jse.executeScript("arguments[0].scrollIntoView(true);",element);
+                element.click();
+            }
+        }
+    }
+
+    //by Harun cloned from Yalcin
+    public WebElement getWindow(String windowName){
+
+        switch (windowName.toLowerCase()){
+            case "grid settings":
+                gridSettingsWindow.click();
+                BrowserUtils.waitFor(1);
+                return gridSettingsWindow;
+            case "manage filters":
+                manageFiltersWindow.click();
+                BrowserUtils.waitFor(1);
+                return manageFiltersWindow;
+            default:
+                System.out.println("Invalid window name to get window !!!");
+                return null;
+        }
+    }
+    //by Harun cloned from Yalcin
+    public List<WebElement> getNamesOfTheDataBasedOnTheWindow(String windowName){
+        switch (windowName.toLowerCase()){
+            case "grid settings":
+                return namesOfTheDataOnTheGridSettings;
+            case "manage filters":
+                return namesOfTheDataOnTheManageFilters;
+            default:
+                System.out.println("Invalid window name | getNamesOfTheDataOnTheBasedOnTheWindow method");
+                return null;
+        }
+    }
+
+    //by Harun
     public String click_page_group_number(String data) {
 
 
@@ -146,7 +213,7 @@ public class VehicleCostPage extends BasePage {
         }
 
     }
-
+    //by Harun
     public void export_Vehicle_Costs_page_information(String data){
         export_grid.click();
         BrowserUtils.waitFor(1);
