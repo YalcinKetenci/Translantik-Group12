@@ -8,7 +8,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,6 +116,16 @@ public class VehicleCostPage extends BasePage {
     //by ferruh
     @FindBy(xpath = "//button[@class='btn btn-success action-button cc_pointer']")
     public WebElement saveAndCloseButton;
+
+    //by arif
+    @FindBy(xpath = "(//td[@class='string-cell grid-cell grid-body-cell grid-body-cell-Type'])[4]")
+    public WebElement anyCost;
+    //by arif
+    @FindBy(xpath = "//a[@title='Add attachment']")
+    public WebElement addAttachmentButton;
+    //by arif
+    @FindBy(xpath = "//div[@class='uploader input-widget-file']")
+    public WebElement chooseFileButton;
 
 
     public SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM d,yyyy");
