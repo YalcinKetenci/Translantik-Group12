@@ -89,6 +89,35 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(css = ".ui-dialog-title")
     public WebElement selectCarreserv;
 
+    @FindBy(css = ".user-name")
+    public WebElement pageTitle;
+
+    @FindBy(css = ".alert.alert-success.fade.top-messages")
+    public WebElement entitySavedMessage;
+
+    @FindBy(css = ".validation-failed")
+    public WebElement odometerValueMessage;
+
+    @FindBy(css = ".validation-failed")
+    public WebElement dateNotValid;
+
+    @FindBy(css = "//td[contains(text(),'123456')]/preceding-sibling::td/input[@type='checkbox']")
+    public WebElement plate;
+
+    @FindBy(css = ".btn.btn-primary")
+    public WebElement selectButton;
+
+    @FindBy(css = ".extra-info")
+    public WebElement selectedPlate;
+
+    @FindBy(className = "oro-subtitle")
+    public WebElement vehiclesOdometersTitle;
+
+    public WebElement verifyPlate(String plateNo){
+
+        return Driver.get().findElement(By.cssSelector("a[title='"+plateNo+"']"));
+    }
+
 
 
     public void clickTheButton(String buttonTitle){
