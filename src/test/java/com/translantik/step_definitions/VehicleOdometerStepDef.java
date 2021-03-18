@@ -170,7 +170,7 @@ public class VehicleOdometerStepDef {
     @When("the user navigates to {string} {string}")
     public void the_user_navigates_to(String tab, String module) {
         new Dashboard().navigateToModule(tab,module);
-        new Dashboard().waitUntilLoaderScreenDisappear();
+        //new Dashboard().waitUntilLoaderScreenDisappear();
     }
 
     @Then("the user should be able to click {string} button")
@@ -483,16 +483,18 @@ public class VehicleOdometerStepDef {
         Driver.get().findElement(By.cssSelector("i.fa-trash-o.hide-text")).click();
     }
 
-    @Then("User verifies that selected line is deleted and Vehicle Odometer Deleted message can be seen on top of the page")
-    public void user_verifies_that_selected_line_is_deleted_and_Vehicle_Odometer_Deleted_message_can_be_seen_on_top_of_the_page() {
-        System.out.println("hello");
+
+    @When("navigate to {string} tab and {string} module")
+    public void navigate_to_tab_and_module(String tab, String module) {
+        dashboard.navigateToModule(tab, module);
     }
 
-    @When("User navigated to {string} tab {string} module")
-    public void user_navigated_to_tab_modules(String tab, String module) {
-        new Dashboard().navigateToModule(tab, module);
+    @Then("verify the page does not change")
+    public void verify_the_page_does_not_change() {
+        Assert.assertTrue(dashboard.getPageSubTitle().equals("Dashboard"));
 
     }
+
 
 
 
