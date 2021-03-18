@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 
 import java.text.BreakIterator;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -143,6 +142,16 @@ public class VehicleCostPage extends BasePage {
     @FindBy(css = "input[name='oro_calendar_event_form[organizerDisplayName]']")
     public WebElement displayName;
 
+
+    //by arif
+    @FindBy(xpath = "(//td[@class='string-cell grid-cell grid-body-cell grid-body-cell-Type'])[4]")
+    public WebElement anyCost;
+    //by arif
+    @FindBy(xpath = "//a[@title='Add attachment']")
+    public WebElement addAttachmentButton;
+    //by arif
+    @FindBy(xpath = "//div[@class='uploader input-widget-file']")
+    public WebElement chooseFileButton;
 
 
     public SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM d,yyyy");

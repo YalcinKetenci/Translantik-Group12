@@ -4,6 +4,7 @@ import com.translantik.pages.Dashboard;
 import com.translantik.pages.VehicleCostPage;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -18,6 +19,25 @@ import java.util.Date;
 import java.util.List;
 
 public class VehicleCostStepDef {
+
+    //US-032 MR.ARİF
+    @Given("the user clicks any cost")
+    public void the_user_clicks_any_cost() throws InterruptedException {
+        Thread.sleep(5000);
+        new VehicleCostPage().anyCost.click();
+    }
+
+    @Given("the user clicks Add Attachment button")
+    public void the_user_clicks_Add_Attachment_button() throws InterruptedException {
+        Thread.sleep(5000);
+        new VehicleCostPage().addAttachmentButton.click();
+    }
+
+    @Given("the user clicks Choose File button")
+    public void the_user_clicks_Choose_File_button() throws InterruptedException {
+        Thread.sleep(5000);
+        new VehicleCostPage().chooseFileButton.click();
+    }
 
     //US_025 Mr. Harun ALTINTAS
     @Then("the user able to get following vehicle costs information")
