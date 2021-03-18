@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 public class VehiclesStepDef {
 
 
+
     //US_35 Sales manager store manager widget pin fav step def
     @When("the user clicks plus button")
     public void the_user_clicks_plus_button() {
@@ -63,5 +64,6 @@ public class VehiclesStepDef {
         Thread.sleep(1000);
         Assert.assertTrue(Driver.get().findElement(By.xpath("//button[@class='btn minimize-button gold-icon']")).isDisplayed());
     }
+
 
 }
