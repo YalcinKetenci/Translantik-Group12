@@ -19,7 +19,8 @@ Feature:
 	#2-Truck driver can add chasis number and licence plate by using + Add buttons when creating vehicle costs"
   @TRAN-306 @TRAN-351
   Scenario: US-029_TruckDriverCreateVehicleCosts
-    Given the user navigates to "Fleet" "Vehicle Costs"
+    When navigate to "Fleet" tab and "Vehicle Costs" module
+    Then verify 'Vehicles Costs' page title
     When click Create Vehicle Costs button
     And click Save And Close button
     Then User verifies that Entity Saved message can be seen on page

@@ -491,8 +491,12 @@ public class VehicleOdometerStepDef {
 
     @Then("verify the page does not change")
     public void verify_the_page_does_not_change() {
-        Assert.assertTrue(dashboard.getPageSubTitle().equals("Dashboard"));
+        Assert.assertEquals("Dashboard", dashboard.getPageSubTitle());
+    }
 
+    @Then("verify {string} page title")
+    public void verify_page_title(String string) {
+        Assert.assertEquals(string, dashboard.getPageSubTitle());
     }
 
 

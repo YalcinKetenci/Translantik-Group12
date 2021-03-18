@@ -117,6 +117,12 @@ public class VehicleCostPage extends BasePage {
     @FindBy(xpath = "//button[@class='btn btn-success action-button']")
     public WebElement saveAndCloseButton;
 
+    //by ferruh
+    @FindBy(css = ".input-widget")
+    public WebElement pageNumber;
+
+
+
     //by arif
     @FindBy(xpath = "(//td[@class='string-cell grid-cell grid-body-cell grid-body-cell-Type'])[4]")
     public WebElement anyCost;

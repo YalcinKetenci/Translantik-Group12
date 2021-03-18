@@ -174,7 +174,28 @@ public class VehicleCostStepDef {
     public void click_Save_And_Close_button() {
         new VehicleCostPage().waitUntilLoaderScreenDisappear();
         new VehicleCostPage().saveAndCloseButton.click();
-
-
     }
+    @When("click right button")
+    public void click_right_button() {
+        BrowserUtils.waitFor(1);
+        new VehicleCostPage().change_page_right.click();
+    }
+
+    @Then("verify the page number")
+    public void verify_the_page_number() {
+        Assert.assertEquals(new VehicleCostPage().pageNumber.getAttribute("value"),"2");
+    }
+
+    @When("click left button")
+    public void click_left_button() {
+        BrowserUtils.waitFor(1);
+        new VehicleCostPage().change_page_left.click();
+        BrowserUtils.waitFor(3);
+    }
+
+    @Then("verify view numbers")
+    public void verify_view_numbers() {
+        Assert.assertEquals(new VehicleCostPage().pageNumber.getAttribute("value"),"1");
+    }
+
 }
