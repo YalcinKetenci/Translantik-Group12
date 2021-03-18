@@ -37,6 +37,7 @@ public class VehicleCostStepDef {
     public void the_user_clicks_Choose_File_button() throws InterruptedException {
         Thread.sleep(5000);
         new VehicleCostPage().chooseFileButton.click();
+        Thread.sleep(10000);
     }
 
     //US_025 Mr. Harun ALTINTAS

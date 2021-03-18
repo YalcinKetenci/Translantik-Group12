@@ -7,7 +7,6 @@ import com.translantik.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 
 public class SidebarWidgetsStepDefs {
 
@@ -15,6 +14,7 @@ public class SidebarWidgetsStepDefs {
 
     @When("the user clicks plus button")
     public void the_user_clicks_plus_button() {
+        new Dashboard().waitUntilLoaderScreenDisappear();
         vehicleCostPage.plusIcon.click();
     }
 
