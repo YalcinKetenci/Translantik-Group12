@@ -17,9 +17,9 @@ Feature:
 	#
 	#*1-Truck driver can create vehicle costs by using Create Vehicle Costs button*
 	#2-Truck driver can add chasis number and licence plate by using + Add buttons when creating vehicle costs"
-  @TRAN-306 @TRAN-351 @wip
+  @TRAN-306 @TRAN-351
   Scenario: US-029_TruckDriverCreateVehicleCosts
     Given the user navigates to "Fleet" "Vehicle Costs"
-    When the user clicks Create Vehicle Costs button
-    Then the user should be able to click Save And Close button
-    And User verifies that Entity Saved message can be seen on page
+    When click Create Vehicle Costs button
+    And click Save And Close button
+    Then User verifies that Entity Saved message can be seen on page

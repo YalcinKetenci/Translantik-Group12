@@ -114,7 +114,7 @@ public class VehicleCostPage extends BasePage {
     @FindBy(xpath = "//a[normalize-space()='Create Vehicle Costs']")
     public WebElement createVehicleCostsButton;
     //by ferruh
-    @FindBy(xpath = "//button[@class='btn btn-success action-button cc_pointer']")
+    @FindBy(xpath = "//button[@class='btn btn-success action-button']")
     public WebElement saveAndCloseButton;
 
     //by arif
