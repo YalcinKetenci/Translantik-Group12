@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import java.text.BreakIterator;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -125,7 +126,38 @@ public class VehicleCostPage extends BasePage {
     //by alpekin
     @FindBy(xpath = "//div[@id='pinbar']/div[@class='list-bar']/ul//a")
     public WebElement pinBar;
-    //by ferruh
+
+    //by alpekin
+    @FindBy(css = ".user-name")
+    public WebElement itemPage;
+    //by alpekin
+    @FindBy(css = "a[title='Add an event to this record']")
+    public WebElement addEventButton;
+    //by alpekin
+    @FindBy(css = ".ui-dialog-title")
+    public WebElement addEventPage;
+    //by alpekin
+    @FindBy(css = "input[name='oro_calendar_event_form[title]']")
+    public WebElement titleInputBox;
+    //by alpekin
+    @FindBy(css = ".btn.btn-primary")
+    public WebElement saveButton;
+    //by alpekin
+    @FindBy(css = ".alert.alert-success.fade.top-messages > .message")
+    public WebElement savedMessage;
+    //by alpekin
+    @FindBy(xpath = "//li[@class='active']/a")
+    public WebElement active;
+    //by alpekin
+    @FindBy(css = ".validation-failed span span")
+    public WebElement validationFailed;
+    //by alpekin
+    @FindBy(css = "input[name='oro_calendar_event_form[organizerEmail]']")
+    public WebElement organizerEmailBox;
+    //by alpekin
+    @FindBy(css = "input[name='oro_calendar_event_form[organizerDisplayName]']")
+    public WebElement displayNam
+
     @FindBy(xpath = "//a[normalize-space()='Create Vehicle Costs']")
     public WebElement createVehicleCostsButton;
     //by ferruh
@@ -138,6 +170,7 @@ public class VehicleCostPage extends BasePage {
 
 
 
+
     //by arif
     @FindBy(xpath = "(//td[@class='string-cell grid-cell grid-body-cell grid-body-cell-Type'])[4]")
     public WebElement anyCost;
@@ -147,6 +180,25 @@ public class VehicleCostPage extends BasePage {
     //by arif
     @FindBy(xpath = "//div[@class='uploader input-widget-file']")
     public WebElement chooseFileButton;
+    //by arif
+    @FindBy(xpath = "//div[@class='message']")
+    public WebElement attachmentMessage;
+    //by arif
+    @FindBy(xpath = "//div[@class='modal-body']")
+    public WebElement widgetsWindow;
+    //by arif
+    @FindBy(xpath = "//a[@class='btn widget-picker-add-btn btn-primary']")
+    public WebElement addWidgetButton;
+    //by arif
+    @FindBy(xpath = "//a[@class='btn widget-picker-add-btn btn-primary']")
+    public WebElement widgetAddedMessage;
+    //by arif
+    @FindBy(xpath = "//button[@class='btn minimize-button gold-icon']")
+    public WebElement goldenPin;
+    //by arif
+    @FindBy(xpath = "//button[@class='btn favorite-button gold-icon']")
+    public WebElement goldenFav;
+
 
 
     public SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM d,yyyy");
@@ -321,5 +373,37 @@ public class VehicleCostPage extends BasePage {
         String iconLocation= ".sidebar-widget__icon > i[title='"+iconName+"']";
         return Driver.get().findElement(By.cssSelector(iconLocation));
     }
+
+    //by alpekin
+    public WebElement itemNumber(int itemNo){
+        return Driver.get().findElement(By.xpath("//table/tbody/tr["+itemNo+"]"));
+    }
+
+    //by alpekin
+    public WebElement verifyWithTitle(String text){
+        return Driver.get().findElement(By.xpath("//strong[.='"+text+"']"));
+    }
+
+    //by alpekin
+    public WebElement tabName(String tab){
+        int scrollNo=0;
+        switch (tab) {
+            case "General":
+                scrollNo = 1;
+                break;
+            case "Activity":
+                scrollNo = 2;
+                break;
+            case "Additional Information":
+                scrollNo = 3;
+                break;
+            default:
+                System.out.println("Cannot find element");
+                break;
+        }
+        return Driver.get().findElement(By.xpath("//a[@href='#scroll-"+scrollNo+"-675']"));
+    }
+
+
 }
 
