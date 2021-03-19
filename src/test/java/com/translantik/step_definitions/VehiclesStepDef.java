@@ -1,11 +1,14 @@
 package com.translantik.step_definitions;
 
-import com.translantik.pages.VehicleCostPage;
+import com.translantik.pages.Dashboard;
+import com.translantik.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 
 public class VehiclesStepDef {
+
 
 
     //US-032 Truck driver vehicle cost page attachment
@@ -34,6 +37,11 @@ public class VehiclesStepDef {
         Assert.assertTrue(new VehicleCostPage().widgetAddedMessage.isDisplayed());
     }
 
+    @When("the user click star button")
+    public void the_user_click_star_button() throws InterruptedException {
+        Thread.sleep(10000);
+        Driver.get().findElement(By.xpath("//i[@class='fa-star hide-text']")).click();
+    }
 
     @Then("the user made the page favorite")
     public void the_user_made_the_page_favorite() throws InterruptedException {
@@ -42,6 +50,11 @@ public class VehiclesStepDef {
 
     }
 
+    @When("the user click pin button")
+    public void the_user_click_pin_button() throws InterruptedException {
+        Thread.sleep(10000);
+        Driver.get().findElement(By.xpath("//button[@title='Pin/unpin the page']")).click();
+    }
 
     @Then("the user made the page pinned")
     public void the_user_made_the_page_pinned() throws InterruptedException {

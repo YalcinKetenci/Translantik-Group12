@@ -294,7 +294,7 @@ Feature:
 		Given the user navigates to "Fleet" "Vehicle Costs"
 		When the user click first vehicle cost
 		Then the user should be able to click "Refresh" button
-		And the page should be refreshed	
+		And the page should be refreshed
 
 	#{color:#00875a}*User Story :* {color}
 	#
