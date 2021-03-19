@@ -1,6 +1,7 @@
 package com.translantik.step_definitions;
 
 import com.translantik.pages.Dashboard;
+import com.translantik.pages.VehicleCostPage;
 import com.translantik.utilities.Driver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
