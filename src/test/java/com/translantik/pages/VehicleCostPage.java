@@ -147,6 +147,25 @@ public class VehicleCostPage extends BasePage {
     //by arif
     @FindBy(xpath = "//div[@class='uploader input-widget-file']")
     public WebElement chooseFileButton;
+    //by arif
+    @FindBy(xpath = "//div[@class='message']")
+    public WebElement attachmentMessage;
+    //by arif
+    @FindBy(xpath = "//div[@class='modal-body']")
+    public WebElement widgetsWindow;
+    //by arif
+    @FindBy(xpath = "//a[@class='btn widget-picker-add-btn btn-primary']")
+    public WebElement addWidgetButton;
+    //by arif
+    @FindBy(xpath = "//a[@class='btn widget-picker-add-btn btn-primary']")
+    public WebElement widgetAddedMessage;
+    //by arif
+    @FindBy(xpath = "//button[@class='btn minimize-button gold-icon']")
+    public WebElement goldenPin;
+    //by arif
+    @FindBy(xpath = "//button[@class='btn favorite-button gold-icon']")
+    public WebElement goldenFav;
+
 
 
     public SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM d,yyyy");
