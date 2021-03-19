@@ -39,7 +39,7 @@ public class VehicleOdometerStepDef {
 
     @Then("User verifies that Create Vehicle Odometer page opened")
     public void user_verifies_create_page_opened() {
-        Assert.assertEquals("Create Vehicle Odometer", Driver.get().findElement(By.cssSelector(".user-name")).getText());
+        Assert.assertEquals("Create Vehicle Odometer", new VehicleOdometerPage().pageTitle.getText());
     }
 
     @When("User clicks Save And Close button")
@@ -50,7 +50,7 @@ public class VehicleOdometerStepDef {
 
     @Then("User verifies that Entity Saved message can be seen on page")
     public void userVerifiesThatEntitySavedMessageCanBeSeenOnPage() {
-        WebElement entitySaved= Driver.get().findElement(By.cssSelector(".alert.alert-success.fade.top-messages"));
+        WebElement entitySaved= new VehicleOdometerPage().entitySavedMessage;
         Assert.assertTrue(entitySaved.isEnabled());
     }
 
@@ -67,7 +67,7 @@ public class VehicleOdometerStepDef {
 
     @Then("User gets {string} message for Odometer Value")
     public void user_gets_message_for_Odometer_Value(String valueNotValid) {
-        Assert.assertEquals(valueNotValid,Driver.get().findElement(By.cssSelector(".validation-failed")).getText());
+        Assert.assertEquals(valueNotValid,new VehicleOdometerPage().odometerValueMessage.getText());
         vehicleOdometerPage.odometerValue.clear();
     }
 
@@ -78,7 +78,7 @@ public class VehicleOdometerStepDef {
 
     @Then("User gets {string} message for Date")
     public void user_gets_message_for_Date(String dateNotValid) {
-        Assert.assertEquals(dateNotValid,Driver.get().findElement(By.cssSelector(".validation-failed")).getText());
+        Assert.assertEquals(dateNotValid,new VehicleOdometerPage().dateNotValid.getText());
     }
 
     @When("User clicks +Add button on the same line of License Plate")
@@ -95,22 +95,22 @@ public class VehicleOdometerStepDef {
     @When("User clicks checkbox of {string}")
     public void user_clicks_checkbox_of(String plate) {
 
-        Driver.get().findElement(By.xpath("//td[contains(text(),'123456')]/preceding-sibling::td/input[@type='checkbox']")).click();
+        new VehicleOdometerPage().plate.click();
     }
 
     @When("User clicks Select button")
     public void user_clicks_Select_button() {
-        Driver.get().findElement(By.cssSelector(".btn.btn-primary")).click();
+        new VehicleOdometerPage().selectButton.click();
     }
 
     @Then("User verifies that selected {string} can be seen on Create Vehicle Odometer page")
     public void user_verifies_that_selected_can_be_seen_on_Create_Vehicle_Odometer_page(String plate) {
-        Assert.assertEquals(plate,Driver.get().findElement(By.cssSelector(".extra-info")).getText());
+        Assert.assertEquals(plate,new VehicleOdometerPage().selectedPlate.getText());
     }
 
     @Then("User verifies that selected licence plate {string} can be seen on General Information page")
     public void user_verifies_that_selected_licence_plate_can_be_seen_on_General_Information_page(String plate) {
-        Assert.assertEquals(plate,Driver.get().findElement(By.cssSelector("a[title='"+plate+"']")).getText());
+        Assert.assertEquals(plate,new VehicleOdometerPage().verifyPlate(plate).getText());
     }
     @When("User navigated to {string} tab {string} module")
     public void user_navigated_to_tab_module(String tab, String module) {
@@ -120,7 +120,7 @@ public class VehicleOdometerStepDef {
 
     @Then("User verifies that Vehicles Odometers page opened")
     public void user_verifies_that_page_opened() {
-        Assert.assertEquals("Vehicles Odometers",Driver.get().findElement(By.className("oro-subtitle")).getText());
+        Assert.assertEquals("Vehicles Odometers",new VehicleOdometerPage().vehiclesOdometersTitle.getText());
 
     }
 
