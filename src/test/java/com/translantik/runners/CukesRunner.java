@@ -13,7 +13,10 @@ import org.junit.runner.RunWith;
         features = "src/test/resources",
         glue = "com/translantik/step_definitions",
         dryRun = false,
-        tags = "@wip"
+
+=======
+        tags = "@TRAN-380"
+
 )
 public class CukesRunner {
 
