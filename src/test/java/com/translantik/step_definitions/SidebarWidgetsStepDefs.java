@@ -2,6 +2,7 @@ package com.translantik.step_definitions;
 
 import com.translantik.pages.Dashboard;
 import com.translantik.pages.VehicleCostPage;
+import com.translantik.pages.VehicleOdometerPage;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
 import io.cucumber.java.en.Then;
@@ -13,9 +14,7 @@ public class SidebarWidgetsStepDefs {
     VehicleCostPage vehicleCostPage = new VehicleCostPage();
 
 
-    @When("the user clicks plus button1")
-    public void the_user_clicks_plus_button1() {
-=======
+    VehicleOdometerPage vehicleOdometerPage=new VehicleOdometerPage();
     @When("the user clicks plus button")
     public void the_user_clicks_plus_button() {
         new Dashboard().waitUntilLoaderScreenDisappear();
