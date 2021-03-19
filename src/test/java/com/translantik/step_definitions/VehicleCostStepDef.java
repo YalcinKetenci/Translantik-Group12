@@ -170,6 +170,42 @@ public class VehicleCostStepDef {
         Assert.assertFalse(new VehicleCostPage().vcGridSettingCheckBoxes.get(1).isSelected());
     }
 
+    //US_029 By Ferruh
+
+    @When("click Create Vehicle Costs button")
+    public void clicks_Create_Vehicle_Costs_button() {
+        new VehicleCostPage().createVehicleCostsButton.click();
+    }
+
+    @Then("click Save And Close button")
+    public void click_Save_And_Close_button() {
+        new VehicleCostPage().waitUntilLoaderScreenDisappear();
+        new VehicleCostPage().saveAndCloseButton.click();
+    }
+    @When("click right button")
+    public void click_right_button() {
+        BrowserUtils.waitFor(1);
+        new VehicleCostPage().change_page_right.click();
+    }
+
+    @Then("verify the page number")
+    public void verify_the_page_number() {
+        Assert.assertEquals(new VehicleCostPage().pageNumber.getAttribute("value"),"2");
+    }
+
+    @When("click left button")
+    public void click_left_button() {
+        BrowserUtils.waitFor(1);
+        new VehicleCostPage().change_page_left.click();
+        BrowserUtils.waitFor(3);
+    }
+
+    @Then("verify view numbers")
+    public void verify_view_numbers() {
+        Assert.assertEquals(new VehicleCostPage().pageNumber.getAttribute("value"),"1");
+    }
+
+
 
     @Then("the user click {string} button on {string} page")
     public void theUserClickButtonOnPage(String buttonName, String pageName) {

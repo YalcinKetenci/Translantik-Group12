@@ -174,6 +174,7 @@ public class VehicleOdometerStepDef {
     @When("the user navigates to {string} {string}")
     public void the_user_navigates_to(String tab, String module) {
         new Dashboard().navigateToModule(tab,module);
+        //new Dashboard().waitUntilLoaderScreenDisappear();
     }
 
     @Then("the user should be able to click {string} button")
@@ -464,6 +465,31 @@ public class VehicleOdometerStepDef {
     @When("User clicks to Yes, Delete button on the popup window")
     public void user_clicks_to_Yes_Delete_button_on_the_popup_window() {
         Driver.get().findElement(By.cssSelector("a.btn.ok.btn-danger")).click();
+    }
+
+    @Then("User clicks on Delete popup icon at the end of the each row")
+    public void user_clicks_on_Delete_popup_icon_at_the_end_of_the_each_row() {
+//        new Actions(Driver.get()).moveToElement(Driver.get().findElement(By.xpath("//tr[@class='string-cell grid-cell grid-body-cell grid-body-cell-Model']/td[7]"))).click().perform();
+//        Driver.get().findElement(By.cssSelector("i.fa-trash-o.hide-text")).click();
+        BrowserUtils.waitFor(5);
+        new Actions(Driver.get()).moveToElement(Driver.get().findElement(By.cssSelector("td.action-cell.grid-cell.grid-body-cell"))).perform();
+        Driver.get().findElement(By.cssSelector("i.fa-trash-o.hide-text")).click();
+    }
+
+
+    @When("navigate to {string} tab and {string} module")
+    public void navigate_to_tab_and_module(String tab, String module) {
+        dashboard.navigateToModule(tab, module);
+    }
+
+    @Then("verify the page does not change")
+    public void verify_the_page_does_not_change() {
+        Assert.assertEquals("Dashboard", dashboard.getPageSubTitle());
+    }
+
+    @Then("verify {string} page title")
+    public void verify_page_title(String string) {
+        Assert.assertEquals(string, dashboard.getPageSubTitle());
     }
 
     @And("the user clicks first odometer")

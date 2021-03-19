@@ -125,6 +125,18 @@ public class VehicleCostPage extends BasePage {
     //by alpekin
     @FindBy(xpath = "//div[@id='pinbar']/div[@class='list-bar']/ul//a")
     public WebElement pinBar;
+    //by ferruh
+    @FindBy(xpath = "//a[normalize-space()='Create Vehicle Costs']")
+    public WebElement createVehicleCostsButton;
+    //by ferruh
+    @FindBy(xpath = "//button[@class='btn btn-success action-button']")
+    public WebElement saveAndCloseButton;
+
+    //by ferruh
+    @FindBy(css = ".input-widget")
+    public WebElement pageNumber;
+
+
 
     //by arif
     @FindBy(xpath = "(//td[@class='string-cell grid-cell grid-body-cell grid-body-cell-Type'])[4]")
