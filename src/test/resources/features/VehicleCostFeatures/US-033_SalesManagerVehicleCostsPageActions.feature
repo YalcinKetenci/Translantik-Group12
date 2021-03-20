@@ -22,7 +22,7 @@ Feature:
   @TRAN-381 @TRAN-380
   Scenario:  US-033 Sales Manager Vehicle Costs Page Navigation Test
     When navigate to "Fleet" tab and "Vehicle Costs" module
-    Then verify 'Vehicles Costs' page title
+    Then verify 'All Vehicle Costs' page title
 
 	#{color:#00875a}*User Story :* {color}
 	#
@@ -39,7 +39,7 @@ Feature:
   @TRAN-382 @TRAN-380
   Scenario: US-033 Sales manager can change page number in vehicle costs information
     When navigate to "Fleet" tab and "Vehicle Costs" module
-    Then verify 'Vehicles Costs' page title
+    Then verify 'All Vehicle Costs' page title
     When click right button
     Then verify the page number
     When click left button
@@ -85,7 +85,7 @@ Feature:
   @TRAN-384 @TRAN-380
   Scenario Outline: US-033 Sales manager can send CSV and xlsx formats to email
     When navigate to "Fleet" tab and "Vehicle Costs" module
-    Then verify 'Vehicles Costs' page title
+    Then verify 'All Vehicle Costs' page title
     Then the user able to select by "<export_type>"
     Examples:
       |export_type|

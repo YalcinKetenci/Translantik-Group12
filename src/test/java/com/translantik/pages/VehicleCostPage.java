@@ -156,7 +156,7 @@ public class VehicleCostPage extends BasePage {
     public WebElement organizerEmailBox;
     //by alpekin
     @FindBy(css = "input[name='oro_calendar_event_form[organizerDisplayName]']")
-    public WebElement displayNam;
+    public WebElement displayName;
 
     @FindBy(xpath = "//a[normalize-space()='Create Vehicle Costs']")
     public WebElement createVehicleCostsButton;
@@ -255,7 +255,7 @@ public class VehicleCostPage extends BasePage {
         }
     }
 
-    //by Harun
+    //by Harun @Todo
     public String click_page_group_number(String data) {
 
 

@@ -191,7 +191,7 @@ public class VehicleCostStepDef {
 
     @Then("verify the page number")
     public void verify_the_page_number() {
-        Assert.assertEquals(new VehicleCostPage().pageNumber.getAttribute("value"),"2");
+        Assert.assertEquals("2",new VehicleCostPage().pageNumber.getAttribute("value"));
     }
 
     @When("click left button")
@@ -203,7 +203,7 @@ public class VehicleCostStepDef {
 
     @Then("verify view numbers")
     public void verify_view_numbers() {
-        Assert.assertEquals(new VehicleCostPage().pageNumber.getAttribute("value"),"1");
+        Assert.assertEquals("1",new VehicleCostPage().pageNumber.getAttribute("value"));
     }
 
 
