@@ -121,7 +121,6 @@ public class VehicleOdometerPage extends BasePage {
         return Driver.get().findElement(By.cssSelector("a[title='"+plateNo+"']"));
     }
 
-=======
     @FindBy(xpath = "//*[contains(text(),'Edit')]/i")
     public WebElement editButton;
 
@@ -281,7 +280,7 @@ public class VehicleOdometerPage extends BasePage {
         BrowserUtils.waitFor(2);
         JavascriptExecutor jse = (JavascriptExecutor) Driver.get();
 
-        if (buttonTitle.toLowerCase().equals("activity refresh")) {
+        if (buttonTitle.equalsIgnoreCase("activity refresh")) {
             new VehicleCostPage().activityRefresh.click();
         } else {
             try {
