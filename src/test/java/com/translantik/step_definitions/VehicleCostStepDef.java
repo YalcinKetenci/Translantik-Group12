@@ -8,6 +8,7 @@ import com.translantik.utilities.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en_old.Ac;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -214,5 +215,55 @@ public class VehicleCostStepDef {
                 }
             }
         }
+    //by Harun
     }
+    @When("the user click recyle sign")
+    public void the_user_click_recyle_sign() {
+        BrowserUtils.waitFor(1);
+        new Actions(Driver.get()).moveToElement(new VehicleCostPage().firstItemDropDownToggle).perform();
+        new VehicleCostPage().recyle.click();
+        BrowserUtils.waitForClickablility(new VehicleCostPage().yesDeleteButton,2);
+        new VehicleCostPage().yesDeleteButton.click();
+
+    }
+
+    @Then("the user can't delete item")
+    public void the_user_can_t_delete_item() {
+        BrowserUtils.waitFor(1);
+        Assert.assertEquals(new VehicleCostPage().message.getText(),"You do not have permission to perform this action.");
+
+
+    }
+
+    @When("the user click eye sign")
+    public void the_user_click_eye_sign() {
+        BrowserUtils.waitFor(1);
+        new Actions(Driver.get()).moveToElement(new VehicleCostPage().firstItemDropDownToggle).perform();
+        new VehicleCostPage().eyesign.click();
+
+    }
+
+    @Then("the user see item's information")
+    public void the_user_see_item_s_information() {
+        BrowserUtils.waitForVisibility(new VehicleCostPage().generalInformationTitle,2);
+        Assert.assertEquals(new VehicleCostPage().generalInformationTitle.getText(),"General Information");
+    }
+
+    @When("the user click edit sign")
+    public void the_user_click_edit_sign() {
+        BrowserUtils.waitFor(1);
+        new Actions(Driver.get()).moveToElement(new VehicleCostPage().firstItemDropDownToggle).perform();
+        new VehicleCostPage().edit.click();
+
+
+    }
+
+    @Then("the user can't edit item")
+    public void the_user_can_not_edit_item() {
+        BrowserUtils.waitForVisibility(new VehicleCostPage().message,1);
+        Assert.assertEquals(new VehicleCostPage().message.getText(),"You do not have permission to perform this action.");
+
+
+    }
+
 }

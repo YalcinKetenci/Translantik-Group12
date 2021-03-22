@@ -64,7 +64,7 @@ public abstract class  BasePage {
             e.printStackTrace();
         }
         try {
-            Thread.sleep(1000);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -72,7 +72,7 @@ public abstract class  BasePage {
 
     public String getUserName(){
         waitUntilLoaderScreenDisappear();
-        BrowserUtils.waitForVisibility(userName, 5);
+        BrowserUtils.waitForVisibility(userName, 1);
         return userName.getText();
     }
 
@@ -121,8 +121,8 @@ public abstract class  BasePage {
             new WebDriverWait(Driver.get(),20).until(ExpectedConditions.elementToBeClickable(Driver.get().findElement(By.xpath("//*[text()='"+module+"']"))));
         }
         try{
-            new WebDriverWait(Driver.get(),20).until(ExpectedConditions.visibilityOf(loaderMask));
-            new WebDriverWait(Driver.get(),20).until(ExpectedConditions.invisibilityOf(loaderMask));
+            new WebDriverWait(Driver.get(),2).until(ExpectedConditions.visibilityOf(loaderMask));
+            new WebDriverWait(Driver.get(),2).until(ExpectedConditions.invisibilityOf(loaderMask));
         }catch (Exception e ){}
     }
 
