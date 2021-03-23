@@ -104,7 +104,7 @@ public class VehicleOdometerPage extends BasePage {
     @FindBy(css = ".validation-failed")
     public WebElement dateNotValid;
 
-    @FindBy(css = "//td[contains(text(),'123456')]/preceding-sibling::td/input[@type='checkbox']")
+    @FindBy(xpath = "//td[contains(text(),'123456')]/preceding-sibling::td/input[@type='checkbox']")
     public WebElement plate;
 
     @FindBy(css = ".btn.btn-primary")

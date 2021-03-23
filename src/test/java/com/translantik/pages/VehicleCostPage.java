@@ -25,7 +25,7 @@ public class VehicleCostPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa-chevron-left hide-text']")
     public WebElement change_page_left;
 
-    @FindBy(css = "button.btn.dropdown-toggle" )
+    @FindBy(xpath = "//div[@class='btn-group']/button" )
     public WebElement btn_group_open;
 
     @FindBy(xpath = "//a[@class='dropdown-item']")
@@ -255,11 +255,11 @@ public class VehicleCostPage extends BasePage {
         }
     }
 
-    //by Harun @Todo
+    //by Harun
     public String click_page_group_number(String data) {
 
 
-        new VehicleCostPage().scrollToElementWithJS(btn_group_open);
+       new VehicleCostPage().scrollToElementWithJS(btn_group_open);
         btn_group_open.click();
         BrowserUtils.waitFor(1);
 
