@@ -13,8 +13,14 @@ public class SidebarWidgetsStepDefs {
 
     VehicleCostPage vehicleCostPage = new VehicleCostPage();
 
+
+    @When("the user clicks plus button1")
+    public void the_user_clicks_plus_button1() {
+=======
     @When("the user clicks plus button")
     public void the_user_clicks_plus_button() {
+        new Dashboard().waitUntilLoaderScreenDisappear();
+
         vehicleCostPage.plusIcon.click();
     }
 
@@ -46,8 +52,13 @@ public class SidebarWidgetsStepDefs {
         Assert.assertTrue(vehicleCostPage.visibleIcon(widget).isDisplayed());
     }
 
+<<<<<<< HEAD
     @When("the user click pin button")
     public void the_user_click_pin_button() {
+=======
+    @When("the user click pin button1")
+    public void the_user_click_pin_button1() {
+>>>>>>> origin/master
         BrowserUtils.waitForClickablility(vehicleCostPage.pinIcon,5);
         vehicleCostPage.pinIcon.click();
     }
@@ -66,8 +77,13 @@ public class SidebarWidgetsStepDefs {
         Assert.assertTrue(pageTitle.contains(pinnedPage));
     }
 
+<<<<<<< HEAD
     @When("the user click star button")
     public void the_user_click_star_button() {
+=======
+    @When("the user click star button1")
+    public void the_user_click_star_button1() {
+>>>>>>> origin/master
         BrowserUtils.waitForClickablility(vehicleCostPage.starIcon,5);
         vehicleCostPage.starIcon.click();
     }

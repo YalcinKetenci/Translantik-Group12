@@ -20,7 +20,7 @@ Feature:
 	# 2-Truck driver can change page number for getting following vehicle costs informations
 	# 3-Truck driver can change the entity number by clicking the View Per Page dropdown(10,25,50,100)
 	# 4-Truck driver can get all informations to her/his own email address by using Export Grid button in csv and xlsx formats
-	@TRAN-259 @TRAN-269 @TRAN-264
+	@TRAN-259 @TRAN-269 @TRAN-264 @smoke
 	Scenario:  US-025 Truck Driver Vehicle Costs Page Test
 		When The user click "Fleet" tab and "Vehicle Costs"
 		Then the user able to get following vehicle costs information
@@ -83,7 +83,7 @@ Feature:
 	# 2-Truck driver can change page number for getting following vehicle costs informations
 	# 3-Truck driver can change the entity number by clicking the View Per Page dropdown(10,25,50,100)
 	# {color:#de350b}*4-Truck driver can get all informations to her/his own email address by using Export Grid button in csv and xlsx formats*{color}
-	@TRAN-263 @TRAN-264
+	@TRAN-263 @TRAN-264  @smoke
 	Scenario Outline:  US-025 Truck Driver Use Export Grid Button in csv and xlsx Formats on Vehicle Costs Page Test
 		When The user click "Fleet" tab and "Vehicle Costs"
 		Then the user able to get following vehicle costs information

@@ -65,7 +65,7 @@ Feature:
 	#2-Truck driver can use Filters sign with opening Manage Filters button for filtering informations
 	#3-Truck driver can refresh the page by using Refresh button
 	#4-Truck driver can reset the filtering settings by using Reset button
-	@TRAN-239 @TRAN-269 @TRAN-247
+	@TRAN-239 @TRAN-269 @TRAN-247 @smoke
 	Scenario: US-017 | Truck driver can select all options.
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Grid Settings" button
@@ -92,7 +92,7 @@ Feature:
 	#2-Truck driver can use Filters sign with opening Manage Filters button for filtering informations
 	#3-Truck driver can refresh the page by using Refresh button
 	#4-Truck driver can reset the filtering settings by using Reset button
-	@TRAN-240 @TRAN-269 @TRAN-247
+	@TRAN-240 @TRAN-269 @TRAN-247 @smoke
 	Scenario: US-017 | Truck driver can see only selected options by click selected button.
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Grid Settings" button
@@ -138,7 +138,7 @@ Feature:
 	#2-Truck driver can use Filters sign with opening Manage Filters button for filtering informations
 	#3-Truck driver can refresh the page by using Refresh button
 	#4-Truck driver can reset the filtering settings by using Reset button
-	@TRAN-242 @TRAN-269 @TRAN-247
+	@TRAN-242 @TRAN-269 @TRAN-247 @smoke
 	Scenario: US-017 | Truck driver can see all options by click “All” button.
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Grid Settings" button
@@ -165,7 +165,7 @@ Feature:
 	#2-Truck driver can use Filters sign with opening Manage Filters button for filtering informations
 	#3-Truck driver can refresh the page by using Refresh button
 	#4-Truck driver can reset the filtering settings by using Reset button
-	@TRAN-243 @TRAN-269 @TRAN-247
+	@TRAN-243 @TRAN-269 @TRAN-247 @smoke
 	Scenario: US-017 | Truck driver can select options. 
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Grid Settings" button
@@ -211,7 +211,7 @@ Feature:
 	#2-Truck driver can use Filters sign with opening Manage Filters button for filtering informations
 	#3-Truck driver can refresh the page by using Refresh button
 	#4-Truck driver can reset the filtering settings by using Reset button
-	@TRAN-245 @TRAN-269 @TRAN-247
+	@TRAN-245 @TRAN-269 @TRAN-247 @smoke
 	Scenario: US-017 | Truck driver can use Filters sign
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Filters" button
@@ -285,7 +285,7 @@ Feature:
 	#*2-Truck driver can use Filters sign with opening Manage Filters button for filtering informations*
 	#3-Truck driver can refresh the page by using Refresh button
 	#4-Truck driver can reset the filtering settings by using Reset button
-	@TRAN-249 @TRAN-269 @TRAN-247
+	@TRAN-249 @TRAN-269 @TRAN-247 @smoke
 	Scenario: US-017 | Truck driver can select options
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Filters" button
@@ -406,7 +406,7 @@ Feature:
 	#2-Truck driver can use Filters sign with opening Manage Filters button for filtering informations
 	#3-Truck driver can refresh the page by using Refresh button
 	#*4-Truck driver can reset the filtering settings by using Reset button*
-	@TRAN-253 @TRAN-269 @TRAN-247
+	@TRAN-253 @TRAN-269 @TRAN-247 @smoke
 	Scenario: US-017 | Truck driver can reset the tablo 
 		When the user navigates to "Fleet" "Vehicle Odometer"
 		Then the user should be able to click "Grid Settings" button

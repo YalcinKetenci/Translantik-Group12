@@ -18,7 +18,7 @@ Feature:
 	#*_Acceptance Criterias:_*
 	#
 	#1-Truck Driver can see all informations about specific vehicle odometer.
-	@TRAN-234
+	@TRAN-234 @smoke
 	Scenario: US-20 Truck driver can see all odometer informations test
 		When The user click "Fleet" tab and "Vehicle Odometer"
 		Then User should be able to see all information on page

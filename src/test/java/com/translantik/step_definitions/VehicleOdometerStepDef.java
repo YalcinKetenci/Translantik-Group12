@@ -5,6 +5,7 @@ import com.translantik.pages.VehicleInformationPage;
 import com.translantik.pages.VehicleOdometerPage;
 import com.translantik.utilities.BrowserUtils;
 import com.translantik.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -16,7 +17,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class VehicleOdometerStepDef {
     public String enteredDataIntoGridSettings;
@@ -25,6 +28,7 @@ public class VehicleOdometerStepDef {
     VehicleOdometerPage vehicleOdometerPage=new VehicleOdometerPage();
     String expectedSubtitle=null;
     Dashboard dashboard=new Dashboard();
+    Map<String,String> specificVehicleOdInform = new HashMap<>();
 
     //US_19 Mr. Nurullah ALP EKIN
     @When("User clicks {string} CVO button")
@@ -35,7 +39,7 @@ public class VehicleOdometerStepDef {
 
     @Then("User verifies that Create Vehicle Odometer page opened")
     public void user_verifies_create_page_opened() {
-        Assert.assertEquals("Create Vehicle Odometer", Driver.get().findElement(By.cssSelector(".user-name")).getText());
+        Assert.assertEquals("Create Vehicle Odometer", new VehicleOdometerPage().pageTitle.getText());
     }
 
     @When("User clicks Save And Close button")
@@ -46,7 +50,7 @@ public class VehicleOdometerStepDef {
 
     @Then("User verifies that Entity Saved message can be seen on page")
     public void userVerifiesThatEntitySavedMessageCanBeSeenOnPage() {
-        WebElement entitySaved= Driver.get().findElement(By.cssSelector(".alert.alert-success.fade.top-messages"));
+        WebElement entitySaved= new VehicleOdometerPage().entitySavedMessage;
         Assert.assertTrue(entitySaved.isEnabled());
     }
 
@@ -63,7 +67,7 @@ public class VehicleOdometerStepDef {
 
     @Then("User gets {string} message for Odometer Value")
     public void user_gets_message_for_Odometer_Value(String valueNotValid) {
-        Assert.assertEquals(valueNotValid,Driver.get().findElement(By.cssSelector(".validation-failed")).getText());
+        Assert.assertEquals(valueNotValid,new VehicleOdometerPage().odometerValueMessage.getText());
         vehicleOdometerPage.odometerValue.clear();
     }
 
@@ -74,7 +78,7 @@ public class VehicleOdometerStepDef {
 
     @Then("User gets {string} message for Date")
     public void user_gets_message_for_Date(String dateNotValid) {
-        Assert.assertEquals(dateNotValid,Driver.get().findElement(By.cssSelector(".validation-failed")).getText());
+        Assert.assertEquals(dateNotValid,new VehicleOdometerPage().dateNotValid.getText());
     }
 
     @When("User clicks +Add button on the same line of License Plate")
@@ -91,22 +95,22 @@ public class VehicleOdometerStepDef {
     @When("User clicks checkbox of {string}")
     public void user_clicks_checkbox_of(String plate) {
 
-        Driver.get().findElement(By.xpath("//td[contains(text(),'123456')]/preceding-sibling::td/input[@type='checkbox']")).click();
+        new VehicleOdometerPage().plate.click();
     }
 
     @When("User clicks Select button")
     public void user_clicks_Select_button() {
-        Driver.get().findElement(By.cssSelector(".btn.btn-primary")).click();
+        new VehicleOdometerPage().selectButton.click();
     }
 
     @Then("User verifies that selected {string} can be seen on Create Vehicle Odometer page")
     public void user_verifies_that_selected_can_be_seen_on_Create_Vehicle_Odometer_page(String plate) {
-        Assert.assertEquals(plate,Driver.get().findElement(By.cssSelector(".extra-info")).getText());
+        Assert.assertEquals(plate,new VehicleOdometerPage().selectedPlate.getText());
     }
 
     @Then("User verifies that selected licence plate {string} can be seen on General Information page")
     public void user_verifies_that_selected_licence_plate_can_be_seen_on_General_Information_page(String plate) {
-        Assert.assertEquals(plate,Driver.get().findElement(By.cssSelector("a[title='"+plate+"']")).getText());
+        Assert.assertEquals(plate,new VehicleOdometerPage().verifyPlate(plate).getText());
     }
     @When("User navigated to {string} tab {string} module")
     public void user_navigated_to_tab_module(String tab, String module) {
@@ -116,7 +120,7 @@ public class VehicleOdometerStepDef {
 
     @Then("User verifies that Vehicles Odometers page opened")
     public void user_verifies_that_page_opened() {
-        Assert.assertEquals("Vehicles Odometers",Driver.get().findElement(By.className("oro-subtitle")).getText());
+        Assert.assertEquals("Vehicles Odometers",new VehicleOdometerPage().vehiclesOdometersTitle.getText());
 
     }
 
@@ -170,7 +174,7 @@ public class VehicleOdometerStepDef {
     @When("the user navigates to {string} {string}")
     public void the_user_navigates_to(String tab, String module) {
         new Dashboard().navigateToModule(tab,module);
-        new Dashboard().waitUntilLoaderScreenDisappear();
+        //new Dashboard().waitUntilLoaderScreenDisappear();
     }
 
     @Then("the user should be able to click {string} button")
@@ -178,6 +182,7 @@ public class VehicleOdometerStepDef {
         pageHtml=Driver.get().getCurrentUrl();
         new VehicleOdometerPage().clickTheButton(buttonName);
         BrowserUtils.waitFor(1);
+
     }
 
     @Then("the user should be able to see {string} window")
@@ -461,6 +466,77 @@ public class VehicleOdometerStepDef {
     public void user_clicks_to_Yes_Delete_button_on_the_popup_window() {
         Driver.get().findElement(By.cssSelector("a.btn.ok.btn-danger")).click();
     }
+
+    @Then("User clicks on Delete popup icon at the end of the each row")
+    public void user_clicks_on_Delete_popup_icon_at_the_end_of_the_each_row() {
+//        new Actions(Driver.get()).moveToElement(Driver.get().findElement(By.xpath("//tr[@class='string-cell grid-cell grid-body-cell grid-body-cell-Model']/td[7]"))).click().perform();
+//        Driver.get().findElement(By.cssSelector("i.fa-trash-o.hide-text")).click();
+        BrowserUtils.waitFor(5);
+        new Actions(Driver.get()).moveToElement(Driver.get().findElement(By.cssSelector("td.action-cell.grid-cell.grid-body-cell"))).perform();
+        Driver.get().findElement(By.cssSelector("i.fa-trash-o.hide-text")).click();
+    }
+
+
+    @When("navigate to {string} tab and {string} module")
+    public void navigate_to_tab_and_module(String tab, String module) {
+        dashboard.navigateToModule(tab, module);
+    }
+
+    @Then("verify the page does not change")
+    public void verify_the_page_does_not_change() {
+        Assert.assertEquals("Dashboard", dashboard.getPageSubTitle());
+    }
+
+    @Then("verify {string} page title")
+    public void verify_page_title(String string) {
+        Assert.assertEquals(string, dashboard.getPageSubTitle());
+    }
+
+    @And("the user clicks first odometer")
+    public void theUserClicksFirstOdometer() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        new VehicleOdometerPage().getFirstOdometer().click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @And("the user click edit sign")
+    public void theUserClickEditSign() {
+
+        new VehicleOdometerPage().editButton.click();
+        BrowserUtils.waitFor(2);
+
+        specificVehicleOdInform = new VehicleOdometerPage().getSpecificVehicleOdInformation();
+    }
+
+    @Then("the user should be able to edit cost information")
+    public void theUserShouldBeAbleToEditCostInformation() {
+    BrowserUtils.waitFor(2);
+
+    new VehicleOdometerPage().setVehicleOdometerEditBoxes("Odometer Value","139000");
+    new VehicleOdometerPage().setVehicleOdometerEditBoxes("Date","Feb 24, 2021");
+    new VehicleOdometerPage().setVehicleOdometerEditBoxes("Driver","Mike");
+    new VehicleOdometerPage().setVehicleOdometerEditBoxes("Unit","miles");
+
+        BrowserUtils.waitFor(2);
+
+
+    Assert.assertNotEquals(new VehicleOdometerPage().getSpecificVehicleOdInformation().get("Odometer Value"),specificVehicleOdInform.get("Odometer Value"));
+    Assert.assertNotEquals(new VehicleOdometerPage().getSpecificVehicleOdInformation().get("Date"),specificVehicleOdInform.get("Date"));
+    Assert.assertNotEquals(new VehicleOdometerPage().getSpecificVehicleOdInformation().get("Driver"),specificVehicleOdInform.get("Driver"));
+    Assert.assertNotEquals(new VehicleOdometerPage().getSpecificVehicleOdInformation().get("Unit"),specificVehicleOdInform.get("Unit"));
+
+        new VehicleOdometerPage().saveAndCloseButton.click();
+    }
+
+
 
 //    @Then("User verifies that selected line is deleted and Vehicle Odometer Deleted message can be seen on top of the page")
 //    public void user_verifies_that_selected_line_is_deleted_and_Vehicle_Odometer_Deleted_message_can_be_seen_on_top_of_the_page() {
