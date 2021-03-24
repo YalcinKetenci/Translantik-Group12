@@ -91,6 +91,32 @@ public class VehicleCostPage extends BasePage {
     @FindBy(xpath = "//ul[@class='ui-multiselect-checkboxes ui-helper-reset fixed-li']/li/label/span")
     public List<WebElement> namesOfTheDataOnTheManageFilters;
 
+    @FindBy(xpath = "//i[@class='fa-eye hide-text']")
+    public WebElement eyesign;
+
+    @FindBy(xpath = "//i[@class='fa-trash-o hide-text']")
+    public WebElement recyle;
+
+    @FindBy(xpath = "//i[@class='fa-pencil-square-o hide-text']")
+    public WebElement edit;
+
+    @FindBy(xpath = "//h5[@class='user-fieldset']")
+    public WebElement generalInformationTitle;
+
+    @FindBy(xpath = "(//td[@class='action-cell grid-cell grid-body-cell'])[1]")
+    public WebElement firstItemDropDownToggle;
+
+    @FindBy(xpath = "//div[(@class='message')]")
+    public WebElement message;
+
+    @FindBy(xpath = "//a[(@class='btn ok btn-danger')]")
+    public WebElement yesDeleteButton;
+
+
+
+
+
+
 
 
     //by alpekin
